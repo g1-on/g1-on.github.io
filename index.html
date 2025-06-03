@@ -157,13 +157,6 @@
             display: inline-block;
         }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            // IMPORTANT: Replace with your EmailJS Public Key
-            emailjs.init({ publicKey: "uk7TIEZSs07dcPydI" });
-        })();
-    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -505,40 +498,36 @@
                         </form>
                     </div>
                     <div class="bg-gray-700 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md">
-                        <h3 class="text-xl text-gray-100 mb-6">Contact Information</h3>
-                        <div class="space-y-5">
-                            <div class="flex">
-                                <div class="w-28 flex-shrink-0">
-                                    <h4 class="text-gray-200 font-semibold">ADDRESS:</h4>
-                                </div>
-                                <div class="text-gray-400">
-                                    <p>123 Luxury Avenue, Prime City, India 400001</p>
-                                </div>
-                            </div>
-                            <div class="flex">
-                                <div class="w-28 flex-shrink-0">
-                                    <h4 class="text-gray-200 font-semibold">TEL:</h4>
-                                </div>
-                                <div class="text-gray-400">
-                                    <p>+91 98765 43210</p>
+                        <h3 class="text-xl text-gray-100 mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="contact-icon-placeholder">Addr:</span>
+                                <div>
+                                    <h4 class="text-gray-200">Address:</h4>
+                                    <p class="text-gray-400">123 Luxury Avenue, Prime City, India 400001</p>
                                 </div>
                             </div>
-                            <div class="flex">
-                                <div class="w-28 flex-shrink-0">
-                                    <h4 class="text-gray-200 font-semibold">MAIL:</h4>
-                                </div>
-                                <div class="text-gray-400">
-                                    <p>info@globaloneconsulting.com</p>
+                            <div class="flex items-start">
+                                <span class="contact-icon-placeholder">Tel:</span>
+                                <div>
+                                    <h4 class="text-gray-200">Phone:</h4>
+                                    <p class="text-gray-400">+91 98765 43210</p>
                                 </div>
                             </div>
-                            <div class="flex">
-                                <div class="w-28 flex-shrink-0">
-                                    <h4 class="text-gray-200 font-semibold">HRS:</h4>
+                            <div class="flex items-start">
+                                <span class="contact-icon-placeholder">Mail:</span>
+                                <div>
+                                    <h4 class="text-gray-200">Email:</h4>
+                                    <p class="text-gray-400">info@globaloneconsulting.com</p>
                                 </div>
-                                <div class="text-gray-400">
-                                    <p>Mon - Fri: 9 AM - 6 PM</p>
-                                    <p>Sat: 10 AM - 4 PM</p>
-                                    <p>Sun: Closed</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="contact-icon-placeholder">Hrs:</span>
+                                <div>
+                                    <h4 class="text-gray-200">Business Hours:</h4>
+                                    <p class="text-gray-400">Mon - Fri: 9 AM - 6 PM</p>
+                                    <p class="text-gray-400">Sat: 10 AM - 4 PM</p>
+                                    <p class="text-gray-400">Sun: Closed</p>
                                 </div>
                             </div>
                         </div>
@@ -546,7 +535,361 @@
                 </div>
             </div>
         </div>
-{{ ... }}
+    </section>
+
+    <!-- Contact Popup Modal Removed -->
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div> <h3 class="text-xl text-white mb-4"><span class="text-[#9c7c38]">Global</span>One Consulting</h3> <p class="text-sm text-gray-500">Your trusted partner in luxury real estate investments. Project Ananta is our commitment to excellence and unparalleled returns.</p> </div>
+                <div> <h3 class="text-xl text-white mb-4">Quick Links</h3> <ul class="space-y-2"> <li><a href="#about" class="text-gray-400 hover:text-[#9c7c38] transition">About Us</a></li> <li><a href="#project" class="text-gray-400 hover:text-[#9c7c38] transition">Project Ananta</a></li> <li><a href="#amenities" class="text-gray-400 hover:text-[#9c7c38] transition">Amenities</a></li> <li><a href="#faq" class="text-gray-400 hover:text-[#9c7c38] transition">FAQ</a></li> <li><a href="#contact" class="text-gray-400 hover:text-[#9c7c38] transition">Contact</a></li> </ul> </div>
+                <div> <h3 class="text-xl text-white mb-4">Follow Us</h3> 
+                    <div class="flex space-x-4"> 
+                        <a href="#" class="text-gray-400 hover:text-[#9c7c38] transition">Facebook</a> 
+                        <a href="#" class="text-gray-400 hover:text-[#9c7c38] transition">Twitter</a> 
+                        <a href="#" class="text-gray-400 hover:text-[#9c7c38] transition">Instagram</a> 
+                        <a href="#" class="text-gray-400 hover:text-[#9c7c38] transition">LinkedIn</a> 
+                    </div> 
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
+                <p>© <span id="currentYear"></span> Global One Consulting. All Rights Reserved.</p>
+                <p>Designed for discerning investors.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top"> ↑ </div>
+
+    <!-- Investment Calculator Modal -->
+    <div id="investment-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1060] hidden">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl text-gray-100">Investment Calculator</h3>
+                <button id="close-investment-modal-btn" class="text-gray-400 hover:text-gray-200 text-2xl">×</button>
+            </div>
+            <div>
+                <p class="text-gray-300 mb-4">Estimate your potential returns with Project Ananta.</p>
+                <label for="investment-amount" class="block text-sm text-gray-300">Investment Amount (₹)</label>
+                <input type="number" id="investment-amount" name="investment-amount" class="mt-1 block w-full p-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-md shadow-sm focus:ring-[#9c7c38] focus:border-[#9c7c38]" placeholder="e.g., 3250000">
+                <label for="expected-roi" class="block text-sm text-gray-300 mt-4">Expected Annual ROI (%)</label>
+                <input type="number" id="expected-roi" name="expected-roi" value="9.2" class="mt-1 block w-full p-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-md shadow-sm focus:ring-[#9c7c38] focus:border-[#9c7c38]">
+                <button id="calculate-investment-button" class="mt-6 w-full bg-[#9c7c38] hover:bg-[#8a6c28] text-white py-2 px-4 rounded-lg">Calculate</button>
+                <div id="calculation-result" class="mt-4 text-lg text-center">
+                    <!-- Results will be injected here. -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Login/Sign Up) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1070] hidden">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full mx-4 relative">
+            <button id="close-auth-modal-btn" class="absolute top-3 right-4 text-gray-400 hover:text-gray-200 text-3xl leading-none font-bold">×</button>
+
+            <!-- Login Form Container -->
+            <div id="login-form-container" class="auth-form">
+                <h3 class="text-2xl text-gray-100 mb-6 text-center">Login</h3>
+                <form id="login-form">
+                    <div class="mb-4">
+                        <label for="login-email" class="block text-gray-300 mb-2 text-sm">Email or Username</label>
+                        <input type="text" id="login-email" name="login-email" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="login-password" class="block text-gray-300 mb-2 text-sm">Password</label>
+                        <input type="password" id="login-password" name="login-password" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="text-right mb-6">
+                        <a href="#" class="text-sm text-[#9c7c38] hover:underline">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-[#9c7c38] hover:bg-[#8a6c28] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out">Login</button>
+                    </div>
+                    <p class="text-center text-sm text-gray-400 mt-6">
+                        Don't have an account? <a href="#" id="show-signup-form-link" class="text-[#9c7c38] hover:underline font-semibold">Sign Up</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Sign Up Form Container (hidden by default) -->
+            <div id="signup-form-container" class="auth-form hidden">
+                <h3 class="text-2xl text-gray-100 mb-6 text-center">Sign Up</h3>
+                <form id="signup-form">
+                    <div class="mb-4">
+                        <label for="signup-name" class="block text-gray-300 mb-2 text-sm">Full Name</label>
+                        <input type="text" id="signup-name" name="signup-name" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="signup-email" class="block text-gray-300 mb-2 text-sm">Email Address</label>
+                        <input type="email" id="signup-email" name="signup-email" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="signup-password" class="block text-gray-300 mb-2 text-sm">Password</label>
+                        <input type="password" id="signup-password" name="signup-password" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="signup-confirm-password" class="block text-gray-300 mb-2 text-sm">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" name="signup-confirm-password" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-[#9c7c38] hover:bg-[#8a6c28] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out">Sign Up</button>
+                    </div>
+                     <p class="text-center text-sm text-gray-400 mt-6">
+                        Already have an account? <a href="#" id="show-login-form-link" class="text-[#9c7c38] hover:underline font-semibold">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileNavLinks = mobileMenu.querySelectorAll('a');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+            let scrollLockers = 0;
+
+            function requestScrollLock() {
+                scrollLockers++;
+                if (scrollLockers === 1) {
+                    document.body.classList.add('body-no-scroll');
+                }
+            }
+
+            function releaseScrollLock() {
+                scrollLockers--;
+                if (scrollLockers <= 0) {
+                    document.body.classList.remove('body-no-scroll');
+                    scrollLockers = 0;
+                }
+            }
+
+            function openSidebar() {
+                mobileMenu.classList.add('open');
+                sidebarOverlay.classList.add('active');
+                requestScrollLock();
+            }
+
+            function closeSidebar() {
+                mobileMenu.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+                releaseScrollLock();
+            }
+
+            if (mobileMenuButton) mobileMenuButton.addEventListener('click', openSidebar);
+            if (closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', closeSidebar);
+            if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+            const scrollToTopButton = document.querySelector('.scroll-to-top');
+            if (scrollToTopButton) {
+                window.addEventListener('scroll', () => {
+                    scrollToTopButton.classList.toggle('visible', window.pageYOffset > 300);
+                });
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', () => {
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item && otherItem.classList.contains('active')) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+                        item.classList.toggle('active');
+                    });
+                }
+            });
+
+            const unitTypeTabs = document.querySelectorAll('.unit-type-tab');
+            const unitTypeContents = document.querySelectorAll('.unit-type-content');
+            unitTypeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    unitTypeTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.dataset.target;
+                    unitTypeContents.forEach(content => {
+                        content.classList.toggle('active', content.id === targetId);
+                    });
+                });
+            });
+
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16); 
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        element.textContent = target.toLocaleString('en-IN');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.ceil(start).toLocaleString('en-IN');
+                    }
+                }, 16);
+                 if (target === 0) element.textContent = '0';
+            }
+            const counters = document.querySelectorAll('.counter-value');
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            counters.forEach(counter => counterObserver.observe(counter));
+
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            const progressBarObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.dataset.width;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            progressBars.forEach(bar => progressBarObserver.observe(bar));
+
+            const slider = document.getElementById('amenities-slider');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+            const sliderDots = document.querySelectorAll('.slider-dot');
+            if (slider && prevButton && nextButton && sliderDots.length > 0) {
+                let currentIndex = 0;
+                const totalSlides = slider.children.length;
+                function updateSlider() {
+                    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    sliderDots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+                nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
+                prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
+                sliderDots.forEach(dot => { dot.addEventListener('click', () => { currentIndex = parseInt(dot.dataset.index); updateSlider(); }); });
+                updateSlider();
+            }
+
+            const openInvestmentModalButton = document.getElementById('open-investment-modal');
+            const closeInvestmentModalButton = document.getElementById('close-investment-modal-btn');
+            const investmentModal = document.getElementById('investment-modal');
+            const calculateInvestmentButton = document.getElementById('calculate-investment-button');
+            const investmentAmountInput = document.getElementById('investment-amount');
+            const expectedRoiInput = document.getElementById('expected-roi');
+            const calculationResultDiv = document.getElementById('calculation-result');
+
+            if (openInvestmentModalButton && investmentModal && closeInvestmentModalButton) {
+                openInvestmentModalButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    investmentModal.classList.remove('hidden');
+                    requestScrollLock();
+                });
+                closeInvestmentModalButton.addEventListener('click', () => {
+                    investmentModal.classList.add('hidden');
+                    releaseScrollLock();
+                });
+                investmentModal.addEventListener('click', (e) => {
+                    if (e.target === investmentModal) {
+                        investmentModal.classList.add('hidden');
+                        releaseScrollLock();
+                    }
+                });
+            }
+
+            if (calculateInvestmentButton && investmentAmountInput && expectedRoiInput && calculationResultDiv) {
+                calculateInvestmentButton.addEventListener('click', () => {
+                    const amount = parseFloat(investmentAmountInput.value);
+                    const roi = parseFloat(expectedRoiInput.value);
+                    calculationResultDiv.innerHTML = '';
+                    if (isNaN(amount) || amount <= 0) { calculationResultDiv.innerHTML += '<p class="text-red-400">Please enter a valid investment amount.</p>'; return; }
+                    if (isNaN(roi) || roi <= 0) { calculationResultDiv.innerHTML += '<p class="text-red-400">Please enter a valid ROI percentage.</p>'; return; }
+                    const annualReturn = (amount * roi) / 100;
+                    const monthlyReturn = annualReturn / 12;
+                    calculationResultDiv.innerHTML = `
+                        <p class="text-green-400">Annual Return: ₹${annualReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                        <p class="text-green-400">Monthly Return: ₹${monthlyReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    `;
+                });
+            }
+
+            const authModal = document.getElementById('auth-modal');
+            const closeAuthModalButton = document.getElementById('close-auth-modal-btn');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const signupFormContainer = document.getElementById('signup-form-container');
+            const showSignupFormLink = document.getElementById('show-signup-form-link');
+            const showLoginFormLink = document.getElementById('show-login-form-link');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            function openAuthModal(formType = 'login') {
+                if (mobileMenu.classList.contains('open')) {
+                    closeSidebar(); 
+                }
+                authModal.classList.remove('hidden');
+                if (formType === 'signup') {
+                    loginFormContainer.classList.add('hidden');
+                    signupFormContainer.classList.remove('hidden');
+                } else {
+                    loginFormContainer.classList.remove('hidden');
+                    signupFormContainer.classList.add('hidden');
+                }
+                requestScrollLock();
+            }
+
+            function closeAuthModal() {
+                authModal.classList.add('hidden');
+                releaseScrollLock();
+            }
+
+            if (authModal) {
+                closeAuthModalButton?.addEventListener('click', closeAuthModal);
+                authModal.addEventListener('click', (e) => {
+                    if (e.target === authModal) closeAuthModal();
+                });
+
+                showSignupFormLink?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loginFormContainer.classList.add('hidden');
+                    signupFormContainer.classList.remove('hidden');
+                });
+                showLoginFormLink?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    signupFormContainer.classList.add('hidden');
+                    loginFormContainer.classList.remove('hidden');
+                });
+
+                loginForm?.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    console.log('Login form submitted (simulated)');
+                    alert('Login form submitted (simulated). Check console for data.');
+                });
+
+                signupForm?.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const password = signupForm.querySelector('#signup-password').value;
+                    const confirmPassword = signupForm.querySelector('#signup-confirm-password').value;
+
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match!");
+                        return;
+                    }
+                    console.log('Sign Up form submitted (simulated)');
+                    alert('Sign Up form submitted (simulated). Check console for data.');
+                });
+            }
+
+            const viewMoreGalleryButton = document.getElementById('view-more-gallery');
+            if (viewMoreGalleryButton) {
                 viewMoreGalleryButton.addEventListener('click', () => {
                     alert('More gallery images would be displayed here. This is a placeholder.');
                 });
@@ -556,55 +899,26 @@
             if (mainContactFormEl) {
                 mainContactFormEl.addEventListener('submit', function(e) {
                     e.preventDefault();
-
-                    const nameField = this.querySelector('#main-name');
-                    const emailField = this.querySelector('#main-email');
-                    const messageField = this.querySelector('#main-message');
-                    const phoneField = this.querySelector('#main-phone');
-                    const submitButton = this.querySelector('button[type="submit"]');
-
-                    if (!nameField.value.trim() || !emailField.value.trim() || !messageField.value.trim()) {
+                    const formData = {
+                        name: this.querySelector('#main-name').value.trim(),
+                        email: this.querySelector('#main-email').value.trim(),
+                        phone: this.querySelector('#main-phone').value.trim(),
+                        message: this.querySelector('#main-message').value.trim()
+                    };
+                    if (!formData.name || !formData.email || !formData.message) {
                         alert('Please fill in Name, Email, and Message fields.');
                         return;
                     }
-
-                    const btnOrigText = submitButton.textContent;
-                    submitButton.textContent = 'Sending...';
-                    submitButton.disabled = true;
-
-                    // IMPORTANT: Replace with your EmailJS Service ID and Template ID
-                    const serviceID = 'service_9xume9l'; // Your actual Service ID
-                    const templateID = 'template_ycusi1a'; // User's actual Template ID
-                    
-                    const templateParams = {
-                        name: nameField.value.trim(),
-                        email: emailField.value.trim(), // Good to keep for 'Reply-To' in EmailJS template settings
-                        phone: phoneField.value.trim(), // Good to keep if you add {{phone}} to template later
-                        message: messageField.value.trim(),
-                        time: new Date().toLocaleString(), // Added for {{time}} variable in your template
-                        // to_email is usually set in EmailJS service/template, not here
-                    };
-
-                    emailjs.send(serviceID, templateID, templateParams)
-                        .then((response) => {
-                           console.log('SUCCESS!', response.status, response.text);
-                           alert('Message sent successfully!');
-                           mainContactFormEl.reset();
-                           submitButton.textContent = btnOrigText;
-                           submitButton.disabled = false;
-                        }, (error) => {
-                           console.log('FAILED...', error);
-                           alert('Failed to send message. Error: ' + JSON.stringify(error));
-                           submitButton.textContent = btnOrigText;
-                           submitButton.disabled = false;
-                        });
+                    console.log('Main Contact Form Data:', formData);
+                    alert('Main contact form submitted (simulated). Check console for data.');
+                    this.reset();
                 });
             }
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
-{{ ... }}
+                    const isMobileMenuLink = this.classList.contains('mobile-menu-link') || this.closest('#mobile-menu');
 
                     if (href.startsWith('#') && href.length > 1) {
                         if (this.id === "mobile-nav-login-btn" || this.id === "mobile-nav-signup-btn") { 
