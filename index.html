@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT ANANTA - LUXURY SERVICE APARTMENTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Montserrat', 'sans-serif'],
+            },
+            colors: {
+              gold: {
+                50: '#fffbeb',
+                100: '#fef3c7',
+                200: '#fde68a', // Used for border-gold-200
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#f59e0b', // Used for focus:border-gold-500
+                600: '#d97706', // Used for text-gold-600, bg-gold-600
+                700: '#b45309', // Used for text-gold-700, hover:bg-gold-700
+                800: '#92400e',
+                900: '#78350f',
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif; /* Ensure Montserrat is primary */
+            scroll-behavior: smooth;
+            font-weight: 200; /* Global extra light weight */
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200; /* Override browser default bolding for headings */
+        }
+        
+        .hero-section {
+            background-image: url("images/glod.jpg"); 
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .amenity-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .amenity-item:hover .amenity-icon {
+            transform: scale(1.2);
+            color: #c8a97e; 
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .tab-active {
+            color: #c8a97e; 
+            border-bottom: 2px solid #c8a97e; 
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-bg_wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+        }
+        .hero-bg_wrap video,
+        .hero-bg_wrap .img-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-bg_wrap-cols {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .hero-bg_wrap-col {
+            flex: 1;
+            overflow: hidden; 
+            position: relative; 
+        }
+        .hero-bg_wrap-slides {
+            height: 100%; 
+        }
+        .hero-bg_wrap_slide {
+            height: auto; 
+            margin-bottom: 10px; 
+        }
+        .hero-bg_wrap_slide picture,
+        .hero-bg_wrap_slide img {
+            display: block;
+            width: 100%;
+        }
+        .hero-bg-gradient_overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; 
+        }
+        .d-md-none { display: block; }
+        .d-none { display: none; }
+        @media (min-width: 768px) { 
+            .d-md-none { display: none; }
+            .d-md-block { display: block; }
+        }
+
+        input[type="file"]::file-selector-button {
+            /* Removed font-semibold */
+            @apply mr-4 py-2 px-4 rounded-md border border-gold-300 text-sm bg-gold-50 text-gold-700 hover:bg-gold-100 cursor-pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+<nav class="fixed w-full bg-white bg-opacity-90 shadow-md z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="flex items-center">
+                <img src="images/GLOBAL ONE POSTER.png" class="h-10 mr-4">
+                <h1 class="text-5xl text-gray-800">
+                    <span class="text-amber-800">ANANTA</span>
+                </h1>
+            </div>
+        </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section h-screen flex items-center justify-center" style="position: relative;">
+        <div class="absolute inset-0 overflow-hidden z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="images/3648257-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="absolute inset-0 bg-black opacity-40 z-[1]"></div>
+        <div class="container mx-auto px-4 text-center relative z-[2]">
+            <h1 class="text-4xl md:text-6xl mb-4 text-white">PROJECT ANANTA</h1>
+            <p class="text-xl md:text-2xl mb-8 text-white">LUXURY 5-STAR PRE-LEASED SERVICE APARTMENTS</p>
+            <div class="flex flex-col items-center gap-y-4">
+                <a href="#investment" class="w-full max-w-xs sm:w-auto bg-transparent border-2 border-white hover:bg-white hover:text-amber-800 text-white py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 text-center">
+                    INVEST NOW
+                </a>
+                <a href="#contact" id="open-booking-form-hero" class="w-full max-w-xs sm:w-auto bg-transparent border-2 border-white hover:bg-white hover:text-amber-800 text-white py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 text-center">
+                    BOOK YOUR SITE
+                </a> 
+                <div class="flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-none sm:w-auto justify-center">
+                   <!-- OLD -->
+<!-- <a href="Why Choose Project Ananta (5).pdf" download class="w-full sm:w-auto bg-transparent border-2 border-white hover:bg-white hover:text-amber-800 text-white py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 text-center"> -->
+<!-- NEW -->
+<a href="{{ url_for('static', filename='Why Choose Project Ananta (5).pdf') }}" download class="w-full sm:w-auto bg-transparent border-2 border-white hover:bg-white hover:text-amber-800 text-white py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 text-center">
+                    </a>
+                    <a href="#features" class="w-full sm:w-auto bg-transparent border-2 border-white hover:bg-white hover:text-amber-800 text-white py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 text-center">
+                        EXPLORE FEATURES
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <div class="relative">
+                        <div class="w-full h-96 bg-amber-100 rounded-lg overflow-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                                <rect width="800" height="600" fill="#f3f4f6"/>
+                                <path d="M0,600 L800,600 L800,400 C600,450 400,350 200,400 C100,425 0,400 0,400 Z" fill="#c8a97e"/>
+                                <rect x="100" y="100" width="600" height="300" rx="10" fill="#fff" stroke="#c8a97e" stroke-width="2"/>
+                                <rect x="150" y="150" width="500" height="200" rx="5" fill="#f8fafc" stroke="#c8a97e" stroke-width="1"/>
+                                <circle cx="400" cy="250" r="50" fill="#c8a97e" fill-opacity="0.2"/>
+                                <path d="M350,300 L450,300 L450,350 L400,380 L350,350 Z" fill="#c8a97e"/>
+                                <rect x="300" y="380" width="200" height="20" rx="5" fill="#c8a97e"/>
+                            </svg>
+                        </div>
+                        <div class="absolute -bottom-10 -right-10 bg-amber-800 text-white p-6 rounded-lg shadow-xl">
+                            <p class="text-2xl">5</p>
+                            <p>LUXURY TOWERS</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 scroll-reveal">
+                    <h2 class="text-3xl md:text-4xl mb-6">ABOUT PROJECT ANANTA</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        PROJECT ANANTA REPRESENTS THE PINNACLE OF LUXURY LIVING, OFFERING 5-STAR PRE-LEASED SERVICE APARTMENTS DESIGNED FOR DISCERNING INVESTORS AND RESIDENTS. WITH 5 METICULOUSLY PLANNED TOWERS, EACH HOUSING 466 PREMIUM SUITES, ANANTA CREATES A PERFECT BALANCE OF OPULENCE AND COMFORT.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        OUR VISION IS TO PROVIDE NOT JUST A RESIDENCE, BUT A LIFESTYLE THAT EMBODIES LUXURY, CONVENIENCE, AND EXCEPTIONAL RETURNS ON INVESTMENT. EACH ASPECT OF PROJECT ANANTA HAS BEEN THOUGHTFULLY DESIGNED TO ENSURE AN UNPARALLELED LIVING EXPERIENCE.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-building text-amber-800"></i>
+                            </div>
+                            <div>
+                                <p class="">5 TOWERS</p>
+                                <p class="text-gray-500 text-sm">LUXURY RESIDENCES</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-home text-amber-800"></i>
+                            </div>
+                            <div>
+                                <p class="">466 UNITS</p>
+                                <p class="text-gray-500 text-sm">PER TOWER</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-ruler-combined text-amber-800"></i>
+                            </div>
+                            <div>
+                                <p class="">50-85 SQM</p>
+                                <p class="text-gray-500 text-sm">UNIT SIZES</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-calendar-alt text-amber-800"></i>
+                            </div>
+                            <div>
+                                <p class="">24 MONTHS</p>
+                                <p class="text-gray-500 text-sm">TO POSSESSION</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-cover bg-center text-black" style="background-image: url('images/glod.jpg');">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl mb-4">PREMIUM FEATURES</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">EXPERIENCE UNPARALLELED LUXURY WITH OUR METICULOUSLY DESIGNED SERVICE APARTMENTS OFFERING PREMIUM AMENITIES AND EXCEPTIONAL INVESTMENT BENEFITS.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 feature-card scroll-reveal">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-star text-2xl text-amber-800"></i>
+                    </div>
+                    <h3 class="text-xl mb-4">5-STAR LUXURY</h3>
+                    <p class="text-gray-600">EXPERIENCE THE EPITOME OF LUXURY LIVING WITH OUR 5-STAR RATED SERVICE APARTMENTS DESIGNED FOR COMFORT AND ELEGANCE.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 feature-card scroll-reveal">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-money-bill-wave text-2xl text-amber-800"></i>
+                    </div>
+                    <h3 class="text-xl mb-4">PRE-LEASED INVESTMENT</h3>
+                    <p class="text-gray-600">SECURE MONTHLY RENTAL INCOME OF ₹25,000 WITH OUR PRE-LEASED APARTMENTS, ENSURING CONSISTENT RETURNS ON YOUR INVESTMENT.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 feature-card scroll-reveal">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-tools text-2xl text-amber-800"></i>
+                    </div>
+                    <h3 class="text-xl mb-4">LIFETIME FREE MAINTENANCE</h3>
+                    <p class="text-gray-600">ENJOY WORRY-FREE OWNERSHIP WITH OUR LIFETIME FREE MAINTENANCE SERVICE, ENSURING YOUR PROPERTY REMAINS PRISTINE.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 feature-card scroll-reveal">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-undo-alt text-2xl text-amber-800"></i>
+                    </div>
+                    <h3 class="text-xl mb-4">BUYBACK GUARANTEE</h3>
+                    <p class="text-gray-600">INVEST WITH CONFIDENCE KNOWING YOUR INVESTMENT IS PROTECTED WITH OUR BUYBACK GUARANTEED PROGRAM.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 feature-card scroll-reveal">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-calendar-check text-2xl text-amber-800"></i>
+                    </div>
+                    <h3 class="text-xl mb-4">COMPLIMENTARY STAY</h3>
+                    <p class="text-gray-600">ENJOY 15 DAYS OF COMPLIMENTARY STAY EACH YEAR WITH TEMPTING FOOD AND UNLIMITED BEVERAGES INCLUDED.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 feature-card scroll-reveal">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-ticket-alt text-2xl text-amber-800"></i>
+                    </div>
+                    <h3 class="text-xl mb-4">EXCLUSIVE ACTIVITIES</h3>
+                    <p class="text-gray-600">ACCESS COMPLIMENTARY TICKETS TO WORLD-CLASS ACTIVITIES INCLUDING RC TOYS CHAMPIONSHIP, VR GAMES, ADVENTURE PARK, AND MORE.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Section -->
+    <section id="investment" class="py-20 bg-white text-black"> 
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl mb-4">INVESTMENT OPPORTUNITY</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">SECURE YOUR FUTURE WITH OUR PREMIUM INVESTMENT OPPORTUNITY OFFERING EXCEPTIONAL RETURNS AND BENEFITS.</p> 
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-white text-gray-800 p-8 rounded-lg shadow-xl scroll-reveal">
+                    <h3 class="text-2xl mb-6 text-amber-800">INVESTMENT DETAILS</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between border-b border-gray-200 pb-3">
+                            <span class="">LAUNCH PRICE (PREMIUM SUITES)</span>
+                            <span class="">₹32,50,000</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-3">
+                            <span class="">DOWN PAYMENT</span>
+                            <span class="">₹8,12,500</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-3">
+                            <span class="">MONTHLY RENTAL INCOME</span>
+                            <span class="">₹25,000</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-3">
+                            <span class="">POSSESSION TIMELINE</span>
+                            <span class="">24 MONTHS</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-3">
+                            <span class="">UNIT SIZES AVAILABLE</span>
+                            <span class="">50 SQM & 85 SQM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">ANNUAL ROI</span>
+                            <span class="text-green-600">9.23%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white text-gray-800 p-8 rounded-lg shadow-xl scroll-reveal">
+                    <h3 class="text-2xl mb-6 text-amber-800">INVESTMENT BENEFITS</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>LIFETIME FREE MAINTENANCE - NO ADDITIONAL COSTS</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>SAFE INVESTMENT WITH BUYBACK GUARANTEED PROGRAM</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>ANY DAY WITHDRAWAL FACILITY FOR MAXIMUM FLEXIBILITY</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>15 DAYS COMPLIMENTARY STAY PER YEAR</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>COMPLIMENTARY FOOD & UNLIMITED BEVERAGES DURING STAY</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>ACCESS TO EXCLUSIVE RECREATIONAL ACTIVITIES AND AMENITIES</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8">
+                        <button id="calculate-roi-btn" class="bg-amber-800 hover:bg-amber-900 text-white py-3 px-6 rounded-lg transition duration-300 w-full">
+                            CALCULATE YOUR ROI
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="roi-calculator" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] hidden"> 
+                <div class="bg-white text-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl text-amber-800">ROI CALCULATOR</h3>
+                        <button id="close-calculator" class="text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">UNIT TYPE</label>
+                            <select id="unit-type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                <option value="50">PREMIUM SUITE (50 SQM)</option>
+                                <option value="85">PREMIUM SUITE (85 SQM)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">INVESTMENT AMOUNT</label>
+                            <input type="text" id="investment-amount" value="₹32,50,000" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">ANNUAL RENTAL INCOME</label>
+                            <input type="text" id="annual-income" value="₹3,00,000" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">ANNUAL ROI</label>
+                            <input type="text" id="annual-roi" value="9.23%" class="w-full p-3 border border-gray-300 rounded-lg bg-green-50 text-green-700 focus:outline-none focus:ring-2 focus:ring-amber-500" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">5-YEAR RETURN</label>
+                            <input type="text" id="five-year-return" value="₹15,00,000" class="w-full p-3 border border-gray-300 rounded-lg bg-green-50 text-green-700 focus:outline-none focus:ring-2 focus:ring-amber-500" readonly>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button id="schedule-consultation" class="bg-amber-800 hover:bg-amber-900 text-white py-3 px-6 rounded-lg transition duration-300 w-full">
+                            SCHEDULE INVESTMENT CONSULTATION
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="py-20 bg-cover bg-center text-white" style="background-image: url('images/glod.jpg');">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl mb-4 text-black">EXCLUSIVE AMENITIES</h2> 
+                <p class="text-gray-600 max-w-2xl mx-auto">INDULGE IN A WORLD OF LUXURY WITH OUR COMPREHENSIVE RANGE OF AMENITIES DESIGNED FOR YOUR COMFORT AND ENTERTAINMENT.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-utensils text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">GOURMET DINING</h3>
+                    <p class="text-gray-600 text-sm">COMPLIMENTARY FINE DINING EXPERIENCE</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-glass-cheers text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">PREMIUM BEVERAGES</h3>
+                    <p class="text-gray-600 text-sm">UNLIMITED ALCOHOLIC & NON-ALCOHOLIC DRINKS</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-gamepad text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">VR GAMING</h3>
+                    <p class="text-gray-600 text-sm">CUTTING-EDGE VIRTUAL REALITY EXPERIENCES</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-car text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">RACING TRACK</h3>
+                    <p class="text-gray-600 text-sm">PROFESSIONAL RACING EXPERIENCES</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-water text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">WATER SPORTS</h3>
+                    <p class="text-gray-600 text-sm">EXCITING AQUATIC ACTIVITIES</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-plane text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">FLYING CLUB</h3>
+                    <p class="text-gray-600 text-sm">AVIATION EXPERIENCES AND LESSONS</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-map-marked-alt text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">TREASURE HUNTING</h3>
+                    <p class="text-gray-600 text-sm">EXCITING ADVENTURE QUESTS</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-spa text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">YOGA SESSIONS</h3>
+                    <p class="text-gray-600 text-sm">PROFESSIONAL WELLNESS PROGRAMS</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-music text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">LIVE MUSIC</h3>
+                    <p class="text-gray-600 text-sm">REGULAR CONCERTS AND PERFORMANCES</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-robot text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">RC TOYS CLUB</h3>
+                    <p class="text-gray-600 text-sm">CHAMPIONSHIP EVENTS AND TRAINING</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-hiking text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">ADVENTURE PARK</h3>
+                    <p class="text-gray-600 text-sm">THRILLING OUTDOOR ACTIVITIES</p>
+                </div>
+                 <div class="amenity-item text-center p-6 rounded-lg bg-white bg-opacity-75 hover:bg-opacity-90 transition-all duration-300 scroll-reveal">
+                    <div class="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-concierge-bell text-2xl text-amber-800 amenity-icon"></i>
+                    </div>
+                    <h3 class="mb-2 text-gray-800">CONCIERGE SERVICE</h3>
+                    <p class="text-gray-600 text-sm">24/7 PERSONALIZED ASSISTANCE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl mb-4">PROJECT GALLERY</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">EXPLORE THE EXQUISITE DESIGN AND PREMIUM FEATURES OF PROJECT ANANTA THROUGH OUR GALLERY.</p>
+            </div>
+            <div class="mb-8">
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button class="gallery-tab tab-active px-4 py-2" data-tab="all">ALL</button>
+                    <button class="gallery-tab px-4 py-2 text-gray-700 hover:text-amber-800" data-tab="exterior">EXTERIOR</button>
+                    <button class="gallery-tab px-4 py-2 text-gray-700 hover:text-amber-800" data-tab="interior">INTERIOR</button>
+                    <button class="gallery-tab px-4 py-2 text-gray-700 hover:text-amber-800" data-tab="amenities">AMENITIES</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg" data-category="exterior">
+                    <div class="h-64 bg-amber-200 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                            <rect width="800" height="600" fill="#f3f4f6"/>
+                            <rect x="0" y="400" width="800" height="200" fill="#c8a97e"/>
+                            <rect x="100" y="100" width="600" height="400" fill="#fff" stroke="#c8a97e" stroke-width="2"/>
+                            <rect x="150" y="150" width="500" height="300" fill="#f8fafc"/>
+                            <path d="M150,450 L650,450 L650,150 L400,50 L150,150 Z" fill="#c8a97e" fill-opacity="0.2"/>
+                            <rect x="300" y="350" width="200" height="100" fill="#fff" stroke="#c8a97e"/>
+                            <circle cx="400" cy="400" r="10" fill="#c8a97e"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="text-lg mb-2 text-gray-800">TOWER EXTERIOR VIEW</h3>
+                        <p class="text-gray-600 text-sm">ELEGANT ARCHITECTURAL DESIGN WITH PREMIUM FINISHES</p>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg" data-category="interior">
+                    <div class="h-64 bg-amber-100 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                            <rect width="800" height="600" fill="#f8fafc"/>
+                            <rect x="0" y="400" width="800" height="200" fill="#e5e7eb"/>
+                            <rect x="100" y="300" width="600" height="100" fill="#c8a97e" fill-opacity="0.3"/>
+                            <rect x="300" y="150" width="200" height="150" fill="#c8a97e" fill-opacity="0.2"/>
+                            <rect x="350" y="200" width="100" height="100" fill="#fff" stroke="#c8a97e"/>
+                            <circle cx="400" cy="250" r="25" fill="#c8a97e" fill-opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="text-lg mb-2 text-gray-800">PREMIUM SUITE INTERIOR</h3>
+                        <p class="text-gray-600 text-sm">LUXURIOUS LIVING SPACE WITH MODERN AMENITIES</p>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg" data-category="amenities">
+                    <div class="h-64 bg-blue-100 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                            <rect width="800" height="600" fill="#f0fdff"/>
+                            <path d="M0,400 C200,450 400,350 600,400 C700,425 800,400 800,400 L800,600 L0,600 Z" fill="#93c5fd"/>
+                            <circle cx="200" cy="450" r="50" fill="#3b82f6" fill-opacity="0.3"/>
+                            <circle cx="600" cy="450" r="70" fill="#3b82f6" fill-opacity="0.2"/>
+                            <rect x="300" y="100" width="200" height="200" rx="10" fill="#fff" stroke="#c8a97e"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="text-lg mb-2 text-gray-800">SWIMMING POOL</h3>
+                        <p class="text-gray-600 text-sm">LUXURIOUS INFINITY POOL WITH PANORAMIC VIEWS</p>
+                    </div>
+                </div>
+                 <div class="gallery-item rounded-lg overflow-hidden shadow-lg" data-category="amenities">
+                    <div class="h-64 bg-green-100 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                            <rect width="800" height="600" fill="#f0fff4"/>
+                            <path d="M0,500 C200,450 400,550 600,500 C700,475 800,500 800,500 L800,600 L0,600 Z" fill="#6ee7b7"/>
+                            <circle cx="200" cy="300" r="50" fill="#10b981" fill-opacity="0.3"/>
+                            <circle cx="600" cy="350" r="70" fill="#10b981" fill-opacity="0.2"/>
+                            <rect x="350" y="200" width="100" height="100" rx="50" fill="#c8a97e" fill-opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="text-lg mb-2 text-gray-800">YOGA & WELLNESS CENTER</h3>
+                        <p class="text-gray-600 text-sm">TRANQUIL SPACE FOR RELAXATION AND REJUVENATION</p>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg" data-category="exterior">
+                    <div class="h-64 bg-purple-100 relative">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                            <rect width="800" height="600" fill="#faf5ff"/>
+                            <path d="M0,400 L800,400 L800,600 L0,600 Z" fill="#c8a97e" fill-opacity="0.2"/>
+                            <rect x="200" y="100" width="400" height="300" fill="#fff" stroke="#c8a97e"/>
+                            <path d="M200,100 L600,100 L400,50 Z" fill="#c8a97e"/>
+                            <rect x="300" y="200" width="200" height="100" fill="#c8a97e" fill-opacity="0.3"/>
+                            <rect x="350" y="225" width="100" height="50" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="text-lg mb-2 text-gray-800">CLUBHOUSE EXTERIOR</h3>
+                        <p class="text-gray-600 text-sm">ELEGANT SOCIAL HUB FOR RESIDENTS AND GUESTS</p>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg" data-category="interior">
+                    <div class="h-64 bg-red-100 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full">
+                            <rect width="800" height="600" fill="#fff5f5"/>
+                            <rect x="100" y="100" width="600" height="400" fill="#fff" stroke="#c8a97e"/>
+                            <rect x="150" y="150" width="500" height="300" fill="#f8fafc"/>
+                            <circle cx="400" cy="300" r="100" fill="#c8a97e" fill-opacity="0.2"/>
+                            <rect x="350" y="250" width="100" height="100" fill="#c8a97e" fill-opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="text-lg mb-2 text-gray-800">DINING AREA</h3>
+                        <p class="text-gray-600 text-sm">SOPHISTICATED SPACE FOR GOURMET DINING EXPERIENCES</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+     <section id="contact" class="py-20 bg-cover bg-center text-white" style="background-image: url('images/glod.jpg');">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl mb-4 text-black">CONTACT US</h2> 
+                <p class="text-gray-600 max-w-2xl mx-auto">INTERESTED IN INVESTING OR LEARNING MORE ABOUT PROJECT ANANTA? GET IN TOUCH WITH OUR TEAM.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-white text-gray-800 p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl mb-6 text-amber-800">SEND US A MESSAGE</h3>
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">FULL NAME*</label>
+                            <input type="text" name="name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">EMAIL ADDRESS*</label>
+                            <input type="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">PHONE NUMBER*</label>
+                            <input type="tel" name="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">I'M INTERESTED IN:</label>
+                            <select name="interest" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                <option>INVESTMENT OPPORTUNITY</option>
+                                <option>PROPERTY TOUR</option>
+                                <option>DETAILED BROCHURE</option>
+                                <option>INVESTMENT CONSULTATION</option>
+                                <option>OTHER</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">MESSAGE</label>
+                            <textarea name="message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-amber-800 hover:bg-amber-900 text-white py-3 px-6 rounded-lg transition duration-300 w-full">
+                                SUBMIT INQUIRY
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-white text-gray-800 p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl mb-6 text-amber-800">CONTACT INFORMATION</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-amber-800"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-1">ADDRESS</h4>
+                                <p class="text-gray-600">PROJECT ANANTA SALES OFFICE, LUXURY BOULEVARD, PREMIUM DISTRICT, INDIA</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-phone-alt text-amber-800"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-1">PHONE</h4>
+                                <p class="text-gray-600">+91 98765 43210</p>
+                                <p class="text-gray-600">+91 12345 67890</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope text-amber-800"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-1">EMAIL</h4>
+                                <p class="text-gray-600">INFO@PROJECTANANTA.COM</p>
+                                <p class="text-gray-600">SALES@PROJECTANANTA.COM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-clock text-amber-800"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-1">BUSINESS HOURS</h4>
+                                <p class="text-gray-600">MONDAY - SATURDAY: 10:00 AM - 8:00 PM</p>
+                                <p class="text-gray-600">SUNDAY: BY APPOINTMENT ONLY</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-800 hover:bg-amber-800 hover:text-white transition-all">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-800 hover:bg-amber-800 hover:text-white transition-all">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-800 hover:bg-amber-800 hover:text-white transition-all">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-800 hover:bg-amber-800 hover:text-white transition-all">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl mb-4">PROJECT ANANTA</h3>
+                    <p class="text-gray-400 mb-4">LUXURY 5-STAR PRE-LEASED SERVICE APARTMENTS OFFERING EXCEPTIONAL INVESTMENT OPPORTUNITIES AND PREMIUM LIVING EXPERIENCES.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl mb-4">QUICK LINKS</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">HOME</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">ABOUT</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">FEATURES</a></li>
+                        <li><a href="#investment" class="text-gray-400 hover:text-white transition">INVESTMENT</a></li>
+                        <li><a href="#amenities" class="text-gray-400 hover:text-white transition">AMENITIES</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl mb-4">LEGAL</h3>
+                   <ul class="space-y-2">
+                      <li><a href="/terms" class="text-gray-400 hover:text-white transition">Terms & Conditions</a></li>
+<li><a href="/privacy" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+<li><a href="/refund" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
+<li><a href="/disclaimer" class="text-gray-400 hover:text-white transition">Legal Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl mb-4">NEWSLETTER</h3>
+                    <p class="text-gray-400 mb-4">SUBSCRIBE TO OUR NEWSLETTER FOR UPDATES ON NEW PROJECTS AND INVESTMENT OPPORTUNITIES.</p>
+                    <form id="newsletter-form" class="flex">
+                        <input type="email" name="email" placeholder="YOUR EMAIL" class="p-2 w-full rounded-l-lg focus:outline-none text-gray-800" required>
+                        <button type="submit" class="bg-amber-800 hover:bg-amber-900 px-4 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 PROJECT ANANTA. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+        
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-amber-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Booking Form Container -->
+    <div id="booking-form-container"></div>
+
+    <!-- React and related libraries CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-hook-form@7/dist/react-hook-form.umd.js"></script>
+    <script src="https://unpkg.com/zod@3/lib/index.umd.js"></script>
+    <script src="https://unpkg.com/@hookform/resolvers/zod/dist/zod.umd.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- React Booking Form Logic -->
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+      const { useForm, Controller } = ReactHookForm;
+      const { zodResolver } = HookformResolversZod; 
+      
+      const bookingSchema = z.object({
+        name: z.string().min(2, 'Name must be at least 2 characters'),
+        email: z.string().email('Please enter a valid email address'),
+        phone: z.string().min(10, 'Phone number must be at least 10 digits'),
+        location: z.string().min(2, 'Location is required'),
+        aadharNumber: z.string().length(12, 'Aadhar number must be 12 digits'),
+        panNumber: z.string().length(10, 'PAN number must be 10 characters').regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'Invalid PAN format'),
+        aadharDocument: z.any().refine(file => file instanceof File, "Aadhar document is required.").optional(),
+        panDocument: z.any().refine(file => file instanceof File, "PAN document is required.").optional(),
+        incomeDocument: z.any().optional(), 
+        message: z.string().optional(),
+      });
+
+      const Dialog = ({ open, onOpenChange, children }) => {
+        if (!open) return null;
+        return (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100]"
+            onClick={() => onOpenChange(false)}
+          >
+            {children}
+          </div>
+        );
+      };
+
+      const DialogContent = ({ className, children }) => {
+        return (
+          <div
+            className={`bg-white p-6 rounded-lg shadow-xl sm:max-w-[600px] w-11/12 max-h-[90vh] overflow-y-auto ${className || ''}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {children}
+          </div>
+        );
+      };
+
+      const DialogHeader = ({ children }) => <div className="mb-4">{children}</div>;
+      const DialogTitle = ({ className, children }) => <h2 className={`text-2xl font-thin text-gold-700 tracking-widest uppercase text-center ${className || ''}`}>{children}</h2>; // font-thin (weight 100) is kept as it's extra thin
+      
+      const FormField = ({ control, name, render }) => {
+        return (
+          <Controller
+            control={control}
+            name={name}
+            render={render}
+          />
+        );
+      };
+
+      const FormItem = ({ children }) => <div className="space-y-1">{children}</div>;
+      const FormLabel = ({ className, children }) => <label className={`block text-sm uppercase tracking-wide text-gold-600 flex items-center gap-2 mb-1 ${className || ''}`}>{children}</label>; // Removed font-light
+      const FormControl = ({ children }) => <div>{children}</div>;
+      
+      const FormMessage = ({ errors, name }) => {
+        const error = errors[name];
+        if (!error) return null;
+        return <p className="text-sm text-red-500 mt-1">{error.message}</p>;
+      };
+
+      const Input = React.forwardRef(({ className, type, ...props }, ref) => {
+        return (
+          <input
+            type={type}
+            className={`w-full p-3 border border-gold-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500 ${className || ''}`}
+            ref={ref}
+            {...props}
+          />
+        );
+      });
+
+      const Textarea = React.forwardRef(({ className, ...props }, ref) => {
+        return (
+          <textarea
+            className={`w-full p-3 border border-gold-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500 min-h-[80px] ${className || ''}`}
+            ref={ref}
+            {...props}
+          />
+        );
+      });
+      
+      const Button = ({ type = "button", variant, className, children, ...props }) => {
+        const baseStyle = "uppercase tracking-wide py-3 px-6 rounded-lg transition duration-300"; // Removed font-light
+        let variantStyle = "bg-gold-600 text-white hover:bg-gold-700"; // Default
+        if (variant === "outline") {
+          variantStyle = "border border-gold-200 text-gold-600 hover:bg-gold-50";
+        }
+        return (
+          <button type={type} className={`${baseStyle} ${variantStyle} ${className || ''}`} {...props}>
+            {children}
+          </button>
+        );
+      };
+
+      const BookingForm = ({ isOpen, onClose }) => {
+        const form = useForm({
+          resolver: zodResolver(bookingSchema),
+          defaultValues: {
+            name: '', email: '', phone: '', location: '',
+            aadharNumber: '', panNumber: '', message: '',
+            aadharDocument: undefined, panDocument: undefined, incomeDocument: undefined,
+          },
+        });
+
+        const onSubmit = async (data) => {
+          console.log('Booking form submitted data:', data);
+          const formDataPayload = new FormData();
+          
+          for (const key in data) {
+            if (data[key] instanceof File) {
+                formDataPayload.append(key, data[key], data[key].name);
+            } else if (data[key] !== undefined && data[key] !== null && data[key] !== '') {
+                formDataPayload.append(key, data[key]);
+            }
+          }
+
+          try {
+            const response = await fetch('http://127.0.0.1:5001/api/booking', {
+              method: 'POST',
+              body: formDataPayload,
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              console.error('Backend error response:', result);
+              throw new Error(result.message || `HTTP error! status: ${response.status}`);
+            }
+
+            console.log('Booking Success:', result);
+            alert(result.message || 'Thank you for your booking interest! We will contact you soon.');
+            form.reset();
+            onClose();
+
+          } catch (error) {
+            console.error('Booking Submission Error:', error);
+            alert(error.message || 'An error occurred with your booking request. Please try again.');
+          }
+        };
+        
+        useEffect(() => {
+            const handleEsc = (event) => {
+               if (event.key === 'Escape' && isOpen) {
+                  onClose();
+               }
+            };
+            window.addEventListener('keydown', handleEsc);
+            return () => window.removeEventListener('keydown', handleEsc);
+        }, [isOpen, onClose]);
+
+        return (
+          <Dialog open={isOpen} onOpenChange={onClose}>
+            <DialogContent>
+              <DialogHeader><DialogTitle>BOOK YOUR LUXURY SUITE</DialogTitle></DialogHeader>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField control={form.control} name="name" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-user w-4 h-4"></i> Full Name</FormLabel> <FormControl><Input placeholder="Enter your full name" {...field} /></FormControl> <FormMessage errors={form.formState.errors} name="name" /> </FormItem> )}/>
+                <FormField control={form.control} name="email" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-envelope w-4 h-4"></i> Email Address</FormLabel> <FormControl><Input type="email" placeholder="Enter your email address" {...field} /></FormControl> <FormMessage errors={form.formState.errors} name="email" /> </FormItem> )}/>
+                <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-phone-alt w-4 h-4"></i> Phone Number</FormLabel> <FormControl><Input type="tel" placeholder="Enter your phone number" {...field} /></FormControl> <FormMessage errors={form.formState.errors} name="phone" /> </FormItem> )}/>
+                <FormField control={form.control} name="location" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-map-marker-alt w-4 h-4"></i> Current Location</FormLabel> <FormControl><Input placeholder="Enter your current location" {...field} /></FormControl> <FormMessage errors={form.formState.errors} name="location" /> </FormItem> )}/>
+                <FormField control={form.control} name="aadharNumber" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-id-card w-4 h-4"></i> Aadhar Card Number</FormLabel> <FormControl><Input placeholder="Enter 12-digit Aadhar number" maxLength={12} {...field} /></FormControl> <FormMessage errors={form.formState.errors} name="aadharNumber" /> </FormItem> )}/>
+                <FormField control={form.control} name="panNumber" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-id-card-alt w-4 h-4"></i> PAN Card Number</FormLabel> <FormControl><Input placeholder="Enter 10-character PAN number" maxLength={10} style={{ textTransform: 'uppercase' }} {...field} onChange={e => field.onChange(e.target.value.toUpperCase())} /></FormControl> <FormMessage errors={form.formState.errors} name="panNumber" /> </FormItem> )}/>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormField control={form.control} name="aadharDocument" render={({ field: { onChange, value, ...rest }}) => (<FormItem><FormLabel><i className="fas fa-upload w-4 h-4"></i> Aadhar Copy</FormLabel><FormControl><Input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => onChange(e.target.files?.[0])} {...rest} /></FormControl><FormMessage errors={form.formState.errors} name="aadharDocument"/></FormItem>)}/>
+                  <FormField control={form.control} name="panDocument" render={({ field: { onChange, value, ...rest }}) => (<FormItem><FormLabel><i className="fas fa-upload w-4 h-4"></i> PAN Copy</FormLabel><FormControl><Input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => onChange(e.target.files?.[0])} {...rest} /></FormControl><FormMessage errors={form.formState.errors} name="panDocument"/></FormItem>)}/>
+                  <FormField control={form.control} name="incomeDocument" render={({ field: { onChange, value, ...rest }}) => (<FormItem><FormLabel><i className="fas fa-file-invoice-dollar w-4 h-4"></i> Income Proof (Optional)</FormLabel><FormControl><Input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => onChange(e.target.files?.[0])} {...rest} /></FormControl><FormMessage errors={form.formState.errors} name="incomeDocument"/></FormItem>)}/>
+                </div>
+                
+                <FormField control={form.control} name="message" render={({ field }) => ( <FormItem> <FormLabel><i className="fas fa-comment-dots w-4 h-4"></i> Message (Optional)</FormLabel> <FormControl><Textarea placeholder="Any specific requirements or questions?" {...field} /></FormControl> <FormMessage errors={form.formState.errors} name="message" /> </FormItem> )}/>
+                
+                <div className="flex gap-3 pt-4">
+                  <Button type="button" variant="outline" onClick={onClose} className="flex-1" disabled={form.formState.isSubmitting}>CANCEL</Button>
+                  <Button type="submit" className="flex-1" disabled={form.formState.isSubmitting}>
+                    {form.formState.isSubmitting ? (
+                      <><i className="fas fa-spinner fa-spin mr-2"></i>SUBMITTING...</>
+                    ) : (
+                      'BOOK NOW'
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </DialogContent>
+          </Dialog>
+        );
+      };
+
+      const App = () => {
+        const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
+        const openForm = (e) => { 
+            if (e && e.preventDefault) e.preventDefault();
+            setIsBookingFormOpen(true); 
+        }
+        const closeForm = () => setIsBookingFormOpen(false);
+
+        useEffect(() => {
+          const heroButton = document.getElementById('open-booking-form-hero');
+          if (heroButton) heroButton.addEventListener('click', openForm);
+          
+          const scheduleConsultationButton = document.getElementById('schedule-consultation');
+          if (scheduleConsultationButton) scheduleConsultationButton.addEventListener('click', openForm);
+          
+          return () => {
+            if (heroButton) heroButton.removeEventListener('click', openForm);
+            if (scheduleConsultationButton) scheduleConsultationButton.removeEventListener('click', openForm);
+          };
+        }, []);
+        
+        return <BookingForm isOpen={isBookingFormOpen} onClose={closeForm} />;
+      };
+      ReactDOM.createRoot(document.getElementById('booking-form-container')).render(<App />);
+    </script>
+
+    <!-- Original JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuToggle && mobileMenu) {
+            menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.id === 'open-booking-form-hero') { 
+                    // React handles this
+                } else {
+                     e.preventDefault();
+                }
+
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.length > 1 && targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+                    }
+                } else if (this.id !== 'open-booking-form-hero' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                     mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        const calculateRoiBtn = document.getElementById('calculate-roi-btn');
+        const roiCalculator = document.getElementById('roi-calculator');
+        const closeCalculator = document.getElementById('close-calculator');
+        const unitType = document.getElementById('unit-type');
+        const investmentAmount = document.getElementById('investment-amount');
+        const annualIncome = document.getElementById('annual-income');
+        const annualRoi = document.getElementById('annual-roi');
+        const fiveYearReturn = document.getElementById('five-year-return');
+        
+        if (calculateRoiBtn) calculateRoiBtn.addEventListener('click', () => { if (roiCalculator) roiCalculator.classList.remove('hidden'); });
+        if (closeCalculator) closeCalculator.addEventListener('click', () => { if (roiCalculator) roiCalculator.classList.add('hidden'); });
+        
+        if (unitType) { 
+            unitType.addEventListener('change', () => {
+                if (unitType.value === '50') {
+                    if(investmentAmount) investmentAmount.value = '₹32,50,000';
+                    if(annualIncome) annualIncome.value = '₹3,00,000';
+                    if(annualRoi) annualRoi.value = '9.23%';
+                    if(fiveYearReturn) fiveYearReturn.value = '₹15,00,000';
+                } else { 
+                    if(investmentAmount) investmentAmount.value = '₹55,25,000'; 
+                    if(annualIncome) annualIncome.value = '₹5,40,000';  
+                    if(annualRoi) annualRoi.value = '9.77%';     
+                    if(fiveYearReturn) fiveYearReturn.value = '₹27,00,000';
+                }
+            });
+        }
+        
+        const galleryTabs = document.querySelectorAll('.gallery-tab');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                galleryTabs.forEach(t => {t.classList.remove('tab-active', 'text-amber-800', 'border-amber-800'); t.classList.add('text-gray-700', 'hover:text-amber-800');});
+                tab.classList.add('tab-active', 'text-amber-800', 'border-amber-800'); 
+                tab.classList.remove('text-gray-700', 'hover:text-amber-800');
+                const category = tab.getAttribute('data-tab');
+                galleryItems.forEach(item => item.style.display = (category === 'all' || item.getAttribute('data-category') === category) ? 'block' : 'none');
+            });
+        });
+        
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) { 
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                
+                const formData = new FormData(contactForm);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+
+                if (!data.name || !data.email || !data.phone) {
+                    alert('Please fill in all required fields: Name, Email, and Phone.');
+                    return;
+                }
+                
+                submitButton.disabled = true; 
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>SENDING...';
+
+                fetch('http://127.0.0.1:5001/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw err; });
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    console.log('Contact form success:', result);
+                    alert(result.message || 'THANK YOU FOR YOUR INQUIRY! OUR TEAM WILL CONTACT YOU SHORTLY.');
+                    contactForm.reset();
+                })
+                .catch(error => {
+                    console.error('Contact form error:', error);
+                    alert(error.message || 'An error occurred while submitting your inquiry. Please try again.');
+                })
+                .finally(() => {
+                    submitButton.disabled = false; 
+                    submitButton.innerHTML = originalText;
+                });
+            });
+        }
+
+        const newsletterForm = document.getElementById('newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = newsletterForm.querySelector('input[name="email"]');
+                const submitButton = newsletterForm.querySelector('button[type="submit"]');
+                const originalButtonContent = submitButton.innerHTML;
+                
+                if (!emailInput.value || !emailInput.checkValidity()) {
+                    alert('Please enter a valid email address.');
+                    emailInput.focus();
+                    return;
+                }
+
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+                const data = { email: emailInput.value };
+
+                fetch('http://127.0.0.1:5001/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw err; });
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    console.log('Subscription success:', result);
+                    alert(result.message || 'Thank you for subscribing!');
+                    newsletterForm.reset();
+                })
+                .catch(error => {
+                    console.error('Subscription error:', error);
+                    alert(error.message || 'An error occurred during subscription. Please try again.');
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonContent;
+                });
+            });
+        }
+        
+        const backToTopButton = document.getElementById('back-to-top');
+        if (backToTopButton) { 
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible'); backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible'); backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+        
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            scrollRevealElements.forEach(element => {
+                if (element.getBoundingClientRect().top < windowHeight - 100) element.classList.add('revealed');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global One Consulting - Project Ananta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@150;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       body {
+            font-family: 'Montserrat', sans-serif; /* UNCHANGED */
+            color: hsl(0, 0%, 0%); /* Apple-like dark text for light mode */
+            background-color: #FFFFFF; /* White background */
+            font-weight: 200;  /* UNCHANGED */
+            text-transform: uppercase; /* UNCHANGED */
+            -webkit-font-smoothing: antialiased; /* UNCHANGED */
+            -moz-osx-font-smoothing: grayscale; /* UNCHANGED */
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span, div, li, a, label, legend, th, td, button, input, textarea, select {
+            font-weight: inherit; /* UNCHANGED */
+        }
+
+        strong, b {
+            font-weight: 700; /* UNCHANGED */
+        }
+
+        .hero-bg_wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .hero-bg_wrap video, .hero-bg_wrap .img-cover { width: 100%; height: 100%; object-fit: cover; }
+        .hero-bg_wrap-cols { display: flex; width: 100%; height: 100%; }
+        .hero-bg_wrap-col { flex: 1; overflow: hidden; position: relative; }
+        .hero-bg_wrap-slides { height: 100%; }
+        .hero-bg_wrap_slide { height: auto; margin-bottom: 10px; }
+        .hero-bg_wrap_slide picture, .hero-bg_wrap_slide img { display: block; width: 100%; }
+        .hero-bg-gradient_overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+        input[type="file"]::file-selector-button {
+            @apply mr-4 py-2 px-4 rounded-md border border-gray-300 text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer; /* Light theme input button */
+        }
+
+        .feature-icon {
+            background-color: #E9E9EB; /* Apple light gray */
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: #0e0d0d; /* Apple blue for icon color */
+            font-size: 2rem;
+        }
+
+        .nav-link { position: relative; color: #515154; /* Apple nav link color for light theme */ }
+        .nav-link:hover { color: #000000; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: #0A84FF; /* Apple blue for hover underline */ transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+
+        .scroll-to-top { position: fixed; bottom: 20px; right: 20px; background-color: rgba(230, 230, 230, 0.8); /* Apple light gray semi-transparent */ color: #1D1D1F; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s ease; z-index: 100; backdrop-filter: blur(5px); border: 1px solid rgba(0,0,0,0.05); }
+        .scroll-to-top.visible { opacity: 1; }
+
+        .counter-value { font-family: 'Montserrat', sans-serif; font-weight: 500; } /* Font details UNCHANGED */
+
+        #mobile-menu {
+            position: fixed; top: 0; left: 0; width: 280px; max-width: 80vw; height: 100vh;
+            background-color: #FBFBFD; /* Apple-like very light sidebar */
+            padding-top: 1rem; box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%); transition: transform 0.3s ease-in-out;
+            z-index: 1050; overflow-y: auto;
+        }
+        #mobile-menu.open { transform: translateX(0); }
+        #mobile-menu a {
+            display: block; padding: 0.85rem 1.5rem; color: #1D1D1F; /* Dark text */
+            transition: color 0.2s ease, background-color 0.2s ease;
+            border-bottom: 1px solid #E5E5E7; /* Light gray border */
+        }
+        #mobile-menu a:hover { color: #0A84FF; background-color: #E9E9EB; /* Blue hover, light gray bg */ }
+        #mobile-menu a:last-child { border-bottom: none; }
+        #close-mobile-menu { position: absolute; top: 1rem; right: 1rem; font-size: 1.75rem; line-height: 1; cursor: pointer; color: #86868B; /* Apple medium-dark gray */ }
+        #sidebar-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.4); z-index: 1040; display: none; } /* Slightly lighter overlay */
+        #sidebar-overlay.active { display: block; }
+        .body-no-scroll { overflow: hidden; }
+
+        .amenity-card, .testimonial-card {
+            background-color: #FFFFFF; /* Card background */
+            
+            transition: all 0.3s ease;
+            border-radius: 12px; /* Consistent rounded corners */
+        }
+        .amenity-card:hover, .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* Softer shadow for light theme */
+        }
+        .gallery-img { height: 250px; object-fit: cover; transition: transform 0.3s ease; border-radius: 8px; }
+        .gallery-img:hover { transform: scale(1.05); }
+
+        .contact-form input, .contact-form textarea,
+        .auth-form input {
+            border: 1px solid #D2D2D7; /* Apple light border */
+            background-color: #F5F5F7; /* Apple light input bg */
+            color: #1D1D1F; /* Dark text in input */
+            transition: all 0.3s ease;
+            border-radius: 8px; /* Apple-like rounded inputs */
+        }
+        .contact-form input:focus, .contact-form textarea:focus,
+        .auth-form input:focus {
+            border-color: #0A84FF; /* Apple blue focus */
+            box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2); /* Apple blue focus shadow */
+            outline: none;
+            background-color: #FFFFFF;
+        }
+        #contact-popup-modal-content .contact-form input,
+        #contact-popup-modal-content .contact-form textarea {
+            border: 1px solid #D2D2D7;
+            background-color: #F5F5F7;
+            color: #1D1D1F;
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+        }
+        #contact-popup-modal-content .contact-form input:focus,
+        #contact-popup-modal-content .contact-form textarea:focus {
+            border-color: #0A84FF;
+            box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+            outline: none;
+            background-color: #FFFFFF;
+        }
+
+        .timeline-item { position: relative; padding-left: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background-color: #0A84FF; /* Apple blue */ }
+        .timeline-item::after { content: ''; position: absolute; left: -4px; top: 0; height: 10px; width: 10px; border-radius: 50%; background-color: #0A84FF; /* Apple blue */ border: 2px solid #FFFFFF; /* White border to stand out on blue */ }
+        .faq-item { border-bottom: 1px solid #E5E5E7; /* Light gray border */ }
+        .faq-question { cursor: pointer; transition: all 0.3s ease; }
+        .faq-question:hover { color: #0A84FF; /* Apple blue */ }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-toggle { transition: transform 0.3s ease; color: #86868B; } /* Neutral toggle color */
+        .faq-item.active .faq-toggle { transform: rotate(180deg); color: #0A84FF; }
+        .unit-type-tab {
+            cursor: pointer; transition: all 0.3s ease;
+            border: 1px solid #D2D2D7; /* Light gray border */
+            color: #515154; /* Medium-dark gray for inactive tab */
+            background-color: #F5F5F7; /* Light bg for inactive tab */
+        }
+        .unit-type-tab.active { background-color: #0A84FF; color: white; border-color: #0A84FF; /* Apple blue for active tab */ }
+        .unit-type-content { display: none; }
+        .unit-type-content.active { display: block; }
+        .progress-bar {
+            height: 8px; background-color: #E9E9EB; /* Light gray bg */
+            border-radius: 4px; overflow: hidden;
+        }
+        .progress-bar-fill { height: 100%; background-color: #0A84FF; /* Apple blue */ border-radius: 4px; transition: width 1.5s ease; }
+        .slider-dot { background-color: #D2D2D7; /* Inactive dot color for light theme */ }
+        .slider-dot.active { background-color: #0A84FF; /* Blue for active dot */ }
+
+        /* Generic card styling for sections if specific class is not used */
+        .section-card {
+            background-color: #FBFBFD; /* Very light off-white for cards within sections */
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .p-6 { padding: 1.75rem; }
+        .p-8 { padding: 2.25rem; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-80 backdrop-blur-md shadow-sm sticky top-0 z-50"> <!-- Apple light nav: white, translucent, blurred -->
+       <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/global one  5.png" class="h-14 mr-4"> <!-- Ensure logo is visible on white -->
+                <img src="images/Untitled-1.png" class="h-11 mr-4"> <!-- Ensure logo is visible on white -->
+                </a>
+            </div>
+            <div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Menu -->
+    <div id="mobile-menu" class="">
+        <button id="close-mobile-menu" class="focus:outline-none">
+            ×
+        </button>
+        <a href="#home" class="mobile-menu-link nav-link">Home</a>
+        <a href="#about" class="mobile-menu-link nav-link">About</a>
+        <a href="#project" class="mobile-menu-link nav-link">Project Ananta</a>
+        <a href="#amenities" class="mobile-menu-link nav-link">Amenities</a>
+        <a href="#gallery" class="mobile-menu-link nav-link">Gallery</a>
+        <a href="#location" class="mobile-menu-link nav-link">Location</a>
+        <a href="#faq" class="mobile-menu-link nav-link">FAQ</a>
+        <a href="#contact" class="mobile-menu-link nav-link">Contact</a>
+    </div>
+
+    <div id="sidebar-overlay"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section h-screen flex items-center justify-center" style="position: relative;">
+        <div class="absolute inset-0 overflow-hidden z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="images/3648257-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="absolute inset-0 bg-black opacity-30 z-[1]"></div> <!-- Lighter overlay for video to be more visible -->
+        <div class="container mx-auto px-4 text-center relative z-[2]">
+            <h1 class="text-white text-8xl md:text-8xl mb-4">अनंता</h1> <!-- Keeping hero title white for contrast on video -->
+            
+            <p class="text-white text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Redefining Luxury Living with 5-Star Pre-Leased Service Apartments</p> <!-- Keeping hero text white -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="Why Choose Project Ananta (5).pdf" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-8 py-3 rounded-full transition text-sm md:text-base">Download Investment Plan </a>
+                <a href="#project"class="text-white text-4xl mb-0"><i class=" fa-solid fa-play"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-10 bg-[#F5F5F7]"> <!-- Apple very light gray for section bg -->
+        <div class="container mx-auto px-4 py-3">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-[#1D1D1F] mb-2" data-target="5">0</div> <!-- Dark text for stats -->
+                    <p class="text-[#515154]">Luxury Towers</p> <!-- Medium-dark gray for subtext -->
+                </div>
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-[#1D1D1F] mb-2" data-target="466">0</div>
+                    <p class="text-[#515154]">Units Per Tower</p>
+                </div>
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-[#1D1D1F] mb-2" data-target="24">0</div>
+                    <p class="text-[#515154]">Months to Possession</p>
+                </div>
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-[#1D1D1F] mb-2" data-target="15">0</div>
+                    <p class="text-[#515154]">Days Complimentary Stay</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-[#FFFFFF]"> <!-- Main body background -->
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-4xl mb-4 text-[#1D1D1F]">Global One Consulting</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div> <!-- Light gray line -->
+                <p class="text-[#515154] max-w-3xl mx-auto">Global One Consulting is a premier real estate development firm specializing in luxury properties that combine comfort, elegance, and investment potential. Our flagship project, Ananta, represents our commitment to creating exceptional living spaces with unparalleled amenities and services.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class=" amenity-card p-8 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl text-[#1D1D1F] mb-3">Premium Developments</h3>
+                    <p class="text-[#515154] px-4">We create luxury properties that stand as landmarks of architectural excellence and comfort.</p>
+                </div>
+
+                <div class="amenity-card p-8 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl text-[#1D1D1F] mb-3">Investment Opportunities</h3>
+                    <p class="text-[#515154] px-4">Our properties offer exceptional investment potential with guaranteed returns and buyback options.</p>
+                </div>
+
+                <div class="amenity-card p-8 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl text-[#1D1D1F] mb-3">Customer Satisfaction</h3>
+                    <p class="text-[#515154] px-4">We prioritize client relationships, ensuring transparency and satisfaction at every step.</p>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="section-card"> <!-- Use generic card class -->
+                        <h3 class="text-2xl text-[#1D1D1F] mb-6">Our Vision & Mission</h3>
+                        <p class="text-[#515154] mb-6">At Global One Consulting, we envision a world where luxury living is accessible to discerning investors who seek both comfort and financial growth. Our mission is to develop properties that serve as both exceptional living spaces and sound investment vehicles.</p>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-[#333333] mb-2">Quality Construction</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="95%" style="width: 0;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-[#333333] mb-2">Customer Satisfaction</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="98%" style="width: 0;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-[#333333] mb-2">Investment Returns</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="92%" style="width: 0;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-[#333333] mb-2">Amenities & Services</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="97%" style="width: 0;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card"> <!-- Use generic card class -->
+                        <h3 class="text-2xl text-[#1D1D1F] mb-6">Company Timeline</h3>
+                        <div class="space-y-8">
+                            <div class="timeline-item pl-8">
+                                <h4 class="text-[#333333]">2010</h4>
+                                <p class="text-[#515154]">Global One Consulting was founded with a vision to transform luxury real estate.</p>
+                            </div>
+                            <div class="timeline-item pl-8">
+                                <h4 class="text-[#333333]">2015</h4>
+                                <p class="text-[#515154]">Completed our first major luxury development project with 100% occupancy.</p>
+                            </div>
+                            <div class="timeline-item pl-8">
+                                <h4 class="text-[#333333]">2018</h4>
+                                <p class="text-[#515154]">Expanded operations nationwide and received multiple real estate excellence awards.</p>
+                            </div>
+                            <div class="timeline-item pl-8">
+                                <h4 class="text-[#333333]">2022</h4>
+                                <p class="text-[#515154]">Launched Project Ananta, our most ambitious and luxurious development to date.</p>
+                            </div>
+                            <div class="timeline-item pl-8">
+                                <h4 class="text-[#333333]">2023</h4>
+                                <p class="text-[#515154]">Began pre-leasing of Ananta units with unprecedented investor interest.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Project Details Section -->
+    <section id="project" class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">Project Ananta</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">A rare approved luxury 5-star pre-leased service apartment complex offering premium living with exceptional investment benefits.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="section-card">
+                    <div>
+                        <h3 class="text-2xl mb-6 text-[#1D1D1F]">Project Highlights</h3>
+                        <ul class="space-y-4 text-[#333333]">
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>5 Towers</strong> of luxury service apartments</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>466 Units</strong> in each tower (460 premium suites)</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Unit Sizes:</strong> 50 sqm and 85 sqm</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Launch Price:</strong> ₹32,50,000 (for premium suites only)</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Down Payment:</strong> ₹8,12,500</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Monthly Rental:</strong> ₹25,000</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Possession:</strong> In 24 months</span> </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-2xl mb-6 text-[#1D1D1F]">Investment Benefits</h3>
+                        <ul class="space-y-4 text-[#333333]">
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-gem"></i></span> <span>Lifetime free maintenance</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-gem"></i></span> <span>Safe investment with buyback guaranteed program</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-gem"></i></span> <span>Any day withdrawal facility</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-gem"></i></span> <span>15 days complimentary stay per year</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-gem"></i></span> <span>Complimentary food & beverages during stay</span> </li>
+                            <li class="flex items-start"> <span class="text-[#0A84FF] mr-3"><i class="fas fa-gem"></i></span> <span>Free access to all recreational activities</span> </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-[#0A84FF] transform -rotate-3 rounded-lg"></div>
+                        <div class="relative bg-white p-8 rounded-lg shadow-lg z-10 border border-gray-200"> <!-- White card -->
+                            <svg class="w-full h-64 mb-6" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="100" y="50" width="400" height="300" fill="#E9E9EB" /> <!-- Light gray -->
+                                <rect x="120" y="70" width="360" height="280" fill="#F5F5F7" /> <!-- Off-white -->
+                                <g fill="#AEAEB2"> <!-- Medium gray for details -->
+                                    <rect x="140" y="90" width="30" height="40" /> <rect x="140" y="140" width="30" height="40" /> <rect x="140" y="190" width="30" height="40" /> <rect x="140" y="240" width="30" height="40" /> <rect x="140" y="290" width="30" height="40" />
+                                    <rect x="190" y="90" width="30" height="40" /> <rect x="190" y="140" width="30" height="40" /> <rect x="190" y="190" width="30" height="40" /> <rect x="190" y="240" width="30" height="40" /> <rect x="190" y="290" width="30" height="40" />
+                                    <rect x="240" y="90" width="30" height="40" /> <rect x="240" y="140" width="30" height="40" /> <rect x="240" y="190" width="30" height="40" /> <rect x="240" y="240" width="30" height="40" /> <rect x="240" y="290" width="30" height="40" />
+                                    <rect x="290" y="90" width="30" height="40" /> <rect x="290" y="140" width="30" height="40" /> <rect x="290" y="190" width="30" height="40" /> <rect x="290" y="240" width="30" height="40" /> <rect x="290" y="290" width="30" height="40" />
+                                    <rect x="340" y="90" width="30" height="40" /> <rect x="340" y="140" width="30" height="40" /> <rect x="340" y="190" width="30" height="40" /> <rect x="340" y="240" width="30" height="40" /> <rect x="340" y="290" width="30" height="40" />
+                                </g>
+                                <rect x="90" y="40" width="420" height="10" fill="#0A84FF" />
+                                <polygon points="300,10 90,40 510,40" fill="#0A84FF" />
+                                <rect x="0" y="350" width="600" height="50" fill="#E9E9EB" />
+                                <circle cx="50" cy="330" r="20" fill="#34D399" /> <rect x="45" y="330" width="10" height="30" fill="#1E8A58" /> <!-- Darker green for contrast -->
+                                <circle cx="550" cy="330" r="20" fill="#34D399" /> <rect x="545" y="330" width="10" height="30" fill="#1E8A58" />
+                                <text x="300" y="380" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="200" text-anchor="middle" fill="#0A84FF" style="text-transform: uppercase;">PROJECT ANANTA</text>
+                            </svg>
+                            <div class="space-y-6 text-[#333333]">
+                                <div class="flex items-center justify-between border-b border-[#E5E5E7] pb-4"> <span class="text-[#515154]">Project Type</span> <span class="text-[#1D1D1F]">5-Star Service Apartments</span> </div>
+                                <div class="flex items-center justify-between border-b border-[#E5E5E7] pb-4"> <span class="text-[#515154]">Total Towers</span> <span class="text-[#1D1D1F]">5</span> </div>
+                                <div class="flex items-center justify-between border-b border-[#E5E5E7] pb-4"> <span class="text-[#515154]">Units per Tower</span> <span class="text-[#1D1D1F]">466</span> </div>
+                                <div class="flex items-center justify-between border-b border-[#E5E5E7] pb-4"> <span class="text-[#515154]">Premium Suites</span> <span class="text-[#1D1D1F]">460 per tower</span> </div>
+                                <div class="flex items-center justify-between"> <span class="text-[#515154]">Expected ROI</span> <span class="text-[#28A745]">9.2% annually</span> </div> <!-- Green for ROI -->
+                            </div>
+                            <button id="open-investment-modal" class="mt-8 w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center"> <i class="fas fa-calculator mr-2"></i> Calculate Investment Returns </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <h3 class="text-2xl text-[#1D1D1F] mb-8 text-center">Available Unit Types</h3>
+                <div class="flex flex-wrap justify-center mb-6">
+                    <div class="unit-type-tab active px-6 py-3 rounded-lg mx-2 mb-2" data-target="premium-50"> Premium Suite (50 sqm) </div>
+                    <div class="unit-type-tab px-6 py-3 rounded-lg mx-2 mb-2" data-target="premium-85"> Premium Suite (85 sqm) </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200">
+                    <div id="premium-50" class="unit-type-content active">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <svg class="w-full h-64 mb-6 rounded-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="300" fill="#F5F5F7" /> <rect x="50" y="50" width="300" height="200" fill="none" stroke="#0A84FF" stroke-width="4" />
+                                    <rect x="50" y="50" width="180" height="120" fill="#E9E9EB" stroke="#0A84FF" stroke-width="1" /> <text x="140" y="110" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Living Room</text>
+                                    <rect x="230" y="50" width="120" height="120" fill="#FFFFFF" stroke="#0A84FF" stroke-width="1" /> <text x="290" y="110" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Bedroom</text>
+                                    <rect x="50" y="170" width="120" height="80" fill="#E9E9EB" stroke="#0A84FF" stroke-width="1" /> <text x="110" y="210" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Kitchen</text>
+                                    <rect x="170" y="170" width="80" height="80" fill="#FFFFFF" stroke="#0A84FF" stroke-width="1" /> <text x="210" y="210" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Bath</text>
+                                    <rect x="250" y="170" width="100" height="80" fill="#F5F5F7" stroke="#0A84FF" stroke-width="1" stroke-dasharray="5,5" /> <text x="300" y="210" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Balcony</text>
+                                    <line x1="170" y1="110" x2="190" y2="110" stroke="#333333" stroke-width="2" /> <path d="M170,110 A20,20 0 0 1 170,90" fill="none" stroke="#333333" stroke-width="1" />
+                                    <line x1="210" y1="170" x2="210" y2="150" stroke="#333333" stroke-width="2" /> <path d="M210,170 A20,20 0 0 0 230,170" fill="none" stroke="#333333" stroke-width="1" />
+                                    <text x="200" y="30" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#1D1D1F">Premium Suite - 50 sqm</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl text-[#1D1D1F] mb-4">Premium Suite (50 sqm)</h4>
+                                <p class="text-[#515154] mb-6">Our compact yet luxurious premium suite offers the perfect balance of comfort and elegance. Ideal for individuals or couples looking for a sophisticated investment opportunity.</p>
+                                <div class="space-y-4 mb-6 text-[#333333]">
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Launch Price</span> <span class="text-[#1D1D1F]">₹32,50,000</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Down Payment</span> <span class="text-[#1D1D1F]">₹8,12,500</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Monthly Rental</span> <span class="text-[#1D1D1F]">₹25,000</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Annual ROI</span> <span class="text-[#28A745]">9.2%</span> </div>
+                                </div>
+                                <h5 class="text-[#333333] mb-2">Features:</h5>
+                                <ul class="space-y-2 mb-6 text-[#515154]">
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>1 Bedroom with premium furnishings</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>Modern kitchen with built-in appliances</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>Elegant bathroom with luxury fittings</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>Private balcony with scenic views</span> </li>
+                                </ul>
+                                <button class="w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out"> Enquire About This Unit </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="premium-85" class="unit-type-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <svg class="w-full h-64 mb-6 rounded-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="300" fill="#F5F5F7" /> <rect x="30" y="30" width="340" height="240" fill="none" stroke="#0A84FF" stroke-width="4" />
+                                    <rect x="30" y="30" width="200" height="120" fill="#E9E9EB" stroke="#0A84FF" stroke-width="1" /> <text x="130" y="90" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Living Room</text>
+                                    <rect x="230" y="30" width="140" height="120" fill="#FFFFFF" stroke="#0A84FF" stroke-width="1" /> <text x="300" y="90" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Master Bedroom</text>
+                                    <rect x="230" y="150" width="140" height="120" fill="#FFFFFF" stroke="#0A84FF" stroke-width="1" /> <text x="300" y="210" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Bedroom 2</text>
+                                    <rect x="30" y="150" width="100" height="120" fill="#E9E9EB" stroke="#0A84FF" stroke-width="1" /> <text x="80" y="210" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Kitchen</text>
+                                    <rect x="130" y="150" width="50" height="60" fill="#FFFFFF" stroke="#0A84FF" stroke-width="1" /> <text x="155" y="180" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Bath 1</text>
+                                    <rect x="180" y="150" width="50" height="60" fill="#FFFFFF" stroke="#0A84FF" stroke-width="1" /> <text x="205" y="180" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Bath 2</text>
+                                    <rect x="130" y="210" width="100" height="60" fill="#F5F5F7" stroke="#0A84FF" stroke-width="1" stroke-dasharray="5,5" /> <text x="180" y="240" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#333333">Balcony</text>
+                                    <line x1="180" y1="90" x2="200" y2="90" stroke="#333333" stroke-width="2" /> <path d="M180,90 A20,20 0 0 1 180,70" fill="none" stroke="#333333" stroke-width="1" />
+                                    <line x1="155" y1="150" x2="155" y2="130" stroke="#333333" stroke-width="2" /> <path d="M155,150 A20,20 0 0 0 175,150" fill="none" stroke="#333333" stroke-width="1" />
+                                    <text x="200" y="15" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="200" text-anchor="middle" style="text-transform: uppercase;" fill="#1D1D1F">Premium Suite - 85 sqm</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl text-[#1D1D1F] mb-4">Premium Suite (85 sqm)</h4>
+                                <p class="text-[#515154] mb-6">Our spacious premium suite offers generous living space with two bedrooms, perfect for families or those seeking additional room. Experience luxury living with all the amenities of a 5-star service apartment.</p>
+                                <div class="space-y-4 mb-6 text-[#333333]">
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Launch Price</span> <span class="text-[#1D1D1F]">₹55,25,000</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Down Payment</span> <span class="text-[#1D1D1F]">₹13,81,250</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Monthly Rental</span> <span class="text-[#1D1D1F]">₹42,500</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-[#515154]">Annual ROI</span> <span class="text-[#28A745]">9.2%</span> </div>
+                                </div>
+                                <h5 class="text-[#333333] mb-2">Features:</h5>
+                                <ul class="space-y-2 mb-6 text-[#515154]">
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>2 Bedrooms with premium furnishings</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>2 Elegant bathrooms with luxury fittings</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>Spacious living room with dining area</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>Modern kitchen with premium appliances</span> </li>
+                                    <li class="flex items-start"> <span class="text-[#0A84FF] mr-2"><i class="fas fa-check"></i></span> <span>Private balcony with panoramic views</span> </li>
+                                </ul>
+                                <button class="w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out"> Enquire About This Unit </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="py-16 bg-[#FFFFFF]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">Exclusive Amenities</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">Project Ananta offers a range of world-class amenities designed to provide an unparalleled luxury experience.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="amenity-card p-6"> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-utensils"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Complimentary Food & Beverages</h3> <p class="text-[#515154]">Enjoy tempting food and unlimited beverages (alcoholic & non-alcoholic) during your stay.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-gamepad"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">VR Games & RC Toys Championship</h3> <p class="text-[#515154]">Access to world-class RC toys championship club and cutting-edge VR gaming experiences.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-water"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Water Sports</h3> <p class="text-[#515154]">Enjoy a variety of exciting water sports activities in our premium facilities.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-plane"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Flying Club</h3> <p class="text-[#515154]">Experience the thrill of aviation with our exclusive flying club membership.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-map-marked-alt"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Treasure Hunting</h3> <p class="text-[#515154]">Participate in exciting treasure hunting adventures organized regularly for residents.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-spa"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Yoga Sessions</h3> <p class="text-[#515154]">Rejuvenate your mind and body with professional yoga sessions in serene environments.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-music"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Live Music Concerts</h3> <p class="text-[#515154]">Enjoy exclusive live music performances by renowned artists in our amphitheater.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-flag-checkered"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Racing Track</h3> <p class="text-[#515154]">Experience the adrenaline rush on our professional racing track facilities.</p> </div>
+                <div class="amenity-card p-6 "> <div class="text-[#020202] text-4xl mb-4"> <i class="fas fa-mountain"></i> </div> <h3 class="text-xl text-[#1D1D1F] mb-2">Adventure Park</h3> <p class="text-[#515154]">Challenge yourself with various activities in our state-of-the-art adventure park.</p> </div>
+            </div>
+            <div class="mt-16">
+                <h3 class="text-2xl text-[#1D1D1F] mb-8 text-center">Experience Luxury</h3>
+                <div class="relative">
+                    <div class="overflow-hidden rounded-xl">
+                        <div id="amenities-slider" class="flex transition-transform duration-500 ease-in-out">
+                            <div class="min-w-full px-2"> <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200"> <div class="flex items-center mb-6"> <div class="text-[#0A84FF] text-4xl mr-6"> <i class="fas fa-concierge-bell"></i> </div> <div> <h4 class="text-xl text-[#1D1D1F]">5-Star Service</h4> <p class="text-[#515154]">Experience unparalleled hospitality with our dedicated staff</p> </div> </div> <p class="text-[#515154]">Our trained professionals are available 24/7 to cater to your every need. From room service to personal assistance, enjoy the comfort of luxury hotel living in your own apartment.</p> </div> </div>
+                            <div class="min-w-full px-2"> <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200"> <div class="flex items-center mb-6"> <div class="text-[#0A84FF] text-4xl mr-6"> <i class="fas fa-swimming-pool"></i> </div> <div> <h4 class="text-xl text-[#1D1D1F]">Infinity Pools</h4> <p class="text-[#515154]">Relax in our stunning infinity pools with panoramic views</p> </div> </div> <p class="text-[#515154]">Each tower features its own infinity pool on the rooftop, offering breathtaking views of the surroundings. Enjoy a refreshing swim or simply unwind by the poolside with premium service.</p> </div> </div>
+                            <div class="min-w-full px-2"> <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200"> <div class="flex items-center mb-6"> <div class="text-[#0A84FF] text-4xl mr-6"> <i class="fas fa-dumbbell"></i> </div> <div> <h4 class="text-xl text-[#1D1D1F]">Fitness Center</h4> <p class="text-[#515154]">State-of-the-art equipment with personal trainers</p> </div> </div> <p class="text-[#515154]">Our fully-equipped fitness centers feature the latest exercise machines and equipment. Professional trainers are available to help you achieve your fitness goals with personalized workout plans.</p> </div> </div>
+                        </div>
+                    </div>
+                    <button id="prev-slide" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#E9E9EB] text-black hover:bg-[#DCDCE0] w-10 h-10 rounded-full shadow-md flex items-center justify-center focus:outline-none"> <i class="fas fa-chevron-left"></i> </button>
+                    <button id="next-slide" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#E9E9EB] text-black hover:bg-[#DCDCE0] w-10 h-10 rounded-full shadow-md flex items-center justify-center focus:outline-none"> <i class="fas fa-chevron-right"></i> </button>
+                    <div class="flex justify-center mt-6"> <div class="slider-dot active mx-1 w-3 h-3 rounded-full" data-index="0"></div> <div class="slider-dot mx-1 w-3 h-3 rounded-full" data-index="1"></div> <div class="slider-dot mx-1 w-3 h-3 rounded-full" data-index="2"></div> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">What Our Investors Say</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">Hear from our satisfied investors who have already secured their place in Project Ananta.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8 "> <div class="flex items-center mb-4"> <div class="text-[#020202] text-2xl mr-2"> <i class="fas fa-quote-left"></i> </div> </div> <p class="text-[#333333] mb-6">Investing in Project Ananta has been one of my best financial decisions. The guaranteed rental income and buyback option provide peace of mind, while the luxury amenities make my occasional stays truly memorable.</p> <div class="flex items-center"> <div class="w-12 h-12 bg-[#E9E9EB] rounded-full flex items-center justify-center text-[#1D1D1F] text-xl mr-4"> RK </div> <div> <h4 class="text-[#1D1D1F]">Rajesh Kumar</h4> <p class="text-[#515154] text-sm">Investor since 2022</p> </div> </div> </div>
+                <div class="testimonial-card p-8 "> <div class="flex items-center mb-4"> <div class="text-[#020202] text-2xl mr-2"> <i class="fas fa-quote-left"></i> </div> </div> <p class="text-[#333333] mb-6">The complimentary stay with unlimited food and beverages is an incredible perk. My family loves visiting for vacations, and the investment returns have been consistently excellent. Global One Consulting delivers on all their promises.</p> <div class="flex items-center"> <div class="w-12 h-12 bg-[#E9E9EB] rounded-full flex items-center justify-center text-[#1D1D1F] text-xl mr-4"> SP </div> <div> <h4 class="text-[#1D1D1F]">Sunita Patel</h4> <p class="text-[#515154] text-sm">Investor since 2022</p> </div> </div> </div>
+                <div class="testimonial-card p-8 "> <div class="flex items-center mb-4"> <div class="text-[#020202] text-2xl mr-2"> <i class="fas fa-quote-left"></i> </div> </div> <p class="text-[#333333] mb-6">As a first-time investor, I was initially hesitant, but the team at Global One Consulting guided me through every step. The lifetime free maintenance and guaranteed returns make this a truly hassle-free investment.</p> <div class="flex items-center"> <div class="w-12 h-12 bg-[#E9E9EB] rounded-full flex items-center justify-center text-[#1D1D1F] text-xl mr-4"> AM </div> <div> <h4 class="text-[#1D1D1F]">Amit Mehta</h4> <p class="text-[#515154] text-sm">Investor since 2023</p> </div> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-[#FFFFFF]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">Frequently Asked Questions</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">Find answers to common questions about Project Ananta and the investment opportunity.</p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-white p-2 md:p-4 rounded-xl border border-gray-200">
+                <div class="faq-item active py-4 px-4 md:px-6"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg text-[#1D1D1F]">What is the minimum investment required?</h3> <span class="faq-toggle"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-4 text-[#515154]"> <p>The minimum investment starts at ₹32,50,000 for a 50 sqm premium suite, with a down payment of ₹8,12,500. We also offer flexible payment plans to suit your financial situation.</p> </div> </div>
+                <div class="faq-item py-4 px-4 md:px-6"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg text-[#1D1D1F]">How does the buyback guarantee work?</h3> <span class="faq-toggle"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-4 text-[#515154]"> <p>Our buyback guarantee ensures that Global One Consulting will repurchase your unit at a predetermined value after a specified period. This provides a secure exit strategy for investors who may wish to liquidate their investment in the future.</p> </div> </div>
+                <div class="faq-item py-4 px-4 md:px-6"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg text-[#1D1D1F]">What does "lifetime free maintenance" include?</h3> <span class="faq-toggle"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-4 text-[#515154]"> <p>Lifetime free maintenance covers all common area maintenance, repairs, and upkeep of your apartment. This includes electrical, plumbing, structural maintenance, and regular cleaning services when the unit is not occupied.</p> </div> </div>
+                <div class="faq-item py-4 px-4 md:px-6"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg text-[#1D1D1F]">How is the monthly rental income paid?</h3> <span class="faq-toggle"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-4 text-[#515154]"> <p>Monthly rental income of ₹25,000 (for 50 sqm units) is directly deposited into your bank account on a fixed date each month. This is guaranteed regardless of occupancy, providing you with a stable passive income stream.</p> </div> </div>
+                <div class="faq-item py-4 px-4 md:px-6"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg text-[#1D1D1F]">Can I stay in my apartment whenever I want?</h3> <span class="faq-toggle"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-4 text-[#515154]"> <p>You are entitled to 15 days of complimentary stay per year in your own unit or an equivalent one, subject to availability. Additional days can be arranged at preferential owner rates. Advance booking is recommended, especially during peak seasons.</p> </div> </div>
+                <div class="faq-item py-4 px-4 md:px-6" style="border-bottom: none;"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg text-[#1D1D1F]">When will the project be completed?</h3> <span class="faq-toggle"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-4 text-[#515154]"> <p>Project Ananta is scheduled for completion within 24 months from the launch date. Construction is progressing as per schedule, and we provide regular updates to all investors on the development progress.</p> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">Project Gallery</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">Explore the luxurious spaces and amenities of Project Ananta through our gallery.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="overflow-hidden rounded-xl shadow-md bg-white"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9E9EB" /> <rect x="20" y="20" width="360" height="210" fill="#FFFFFF" /> <rect x="40" y="40" width="320" height="170" fill="#0A84FF" opacity="0.1" /> <text x="200" y="125" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Luxury Suite Interior</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-md bg-white"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9E9EB" /> <rect x="20" y="20" width="360" height="210" fill="#FFFFFF" /> <circle cx="200" cy="125" r="80" fill="#0A84FF" opacity="0.1" /> <text x="200" y="125" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Swimming Pool</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-md bg-white"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9E9EB" /> <rect x="20" y="20" width="360" height="210" fill="#FFFFFF" /> <polygon points="200,40 300,210 100,210" fill="#0A84FF" opacity="0.1" /> <text x="200" y="125" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Lobby Area</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-md bg-white"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9E9EB" /> <rect x="20" y="20" width="360" height="210" fill="#FFFFFF" /> <rect x="60" y="60" width="280" height="130" fill="#0A84FF" opacity="0.1" /> <text x="200" y="125" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Fine Dining Restaurant</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-md bg-white"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9E9EB" /> <rect x="20" y="20" width="360" height="210" fill="#FFFFFF" /> <ellipse cx="200" cy="125" rx="120" ry="60" fill="#0A84FF" opacity="0.1" /> <text x="200" y="125" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Spa & Wellness Center</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-md bg-white"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9E9EB" /> <rect x="20" y="20" width="360" height="210" fill="#FFFFFF" /> <path d="M100,210 Q200,40 300,210" stroke="#0A84FF" stroke-width="40" stroke-opacity="0.1" fill="none" /> <text x="200" y="125" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Aerial View</text> </svg> </div>
+            </div>
+            <div class="text-center mt-8"> <button id="view-more-gallery" class="bg-[#020202] hover:bg-[#0071E3] text-white py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105"> View More Images </button> </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-16 bg-[#FFFFFF]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">Prime Location</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">Project Ananta is strategically located to offer convenience, connectivity, and a serene environment.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div> <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200"> <svg class="w-full h-64 mb-6 rounded-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="300" fill="#F5F5F7" /> <line x1="50" y1="150" x2="350" y2="150" stroke="#E5E5E7" stroke-width="10" /> <line x1="200" y1="50" x2="200" y2="250" stroke="#E5E5E7" stroke-width="10" /> <circle cx="200" cy="150" r="20" fill="#0A84FF" /> <text x="200" y="155" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="200" text-anchor="middle" fill="white" style="text-transform: uppercase;">ANANTA</text> <circle cx="100" cy="100" r="10" fill="#AEAEB2" /> <text x="100" y="85" font-family="Montserrat, Arial, sans-serif" font-size="8" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Airport</text> <circle cx="300" cy="100" r="10" fill="#AEAEB2" /> <text x="300" y="85" font-family="Montserrat, Arial, sans-serif" font-size="8" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Mall</text> <circle cx="100" cy="200" r="10" fill="#AEAEB2" /> <text x="100" y="185" font-family="Montserrat, Arial, sans-serif" font-size="8" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">Hospital</text> <circle cx="300" cy="200" r="10" fill="#AEAEB2" /> <text x="300" y="185" font-family="Montserrat, Arial, sans-serif" font-size="8" font-weight="200" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">School</text> <circle cx="350" cy="50" r="15" fill="#F5F5F7" stroke="#AEAEB2" stroke-width="1"/> <text x="350" y="55" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#333333" style="text-transform: uppercase;">N</text> <line x1="350" y1="50" x2="350" y2="35" stroke="#333333" stroke-width="2" /> </svg> </div> </div>
+                <div> <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200"> <h3 class="text-2xl text-[#1D1D1F] mb-6">Nearby Conveniences</h3> <ul class="space-y-4 text-[#333333]"> <li class="flex items-center"> <span class="text-[#0A84FF] mr-3 w-6 text-center"><i class="fas fa-plane-departure"></i></span> <span>International Airport - 20 mins drive</span> </li> <li class="flex items-center"> <span class="text-[#0A84FF] mr-3 w-6 text-center"><i class="fas fa-shopping-mall"></i></span> <span>Luxury Shopping Mall - 10 mins drive</span> </li> <li class="flex items-center"> <span class="text-[#0A84FF] mr-3 w-6 text-center"><i class="fas fa-hospital"></i></span> <span>Multi-specialty Hospital - 15 mins drive</span> </li> <li class="flex items-center"> <span class="text-[#0A84FF] mr-3 w-6 text-center"><i class="fas fa-graduation-cap"></i></span> <span>Renowned International School - 12 mins drive</span> </li> <li class="flex items-center"> <span class="text-[#0A84FF] mr-3 w-6 text-center"><i class="fas fa-building"></i></span> <span>Business & Tech Park - 18 mins drive</span> </li> <li class="flex items-center"> <span class="text-[#0A84FF] mr-3 w-6 text-center"><i class="fas fa-train"></i></span> <span>Metro Station - 5 mins walk</span> </li> </ul> <p class="text-[#515154] mt-6">The project is situated in a rapidly developing area with excellent infrastructure and connectivity, ensuring high appreciation potential and ease of access.</p> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-[#1D1D1F] mb-4">Get in Touch With Us</h2>
+                <div class="w-24 h-1 bg-[#D2D2D7] mx-auto mb-6"></div>
+                <p class="text-[#515154] max-w-3xl mx-auto">Have questions or ready to invest? Contact us today using the form below or through our contact details, and our expert team will assist you.</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-md contact-form border border-gray-200">
+                        <h3 class="text-xl text-[#1D1D1F] mb-4">Send Us a Message</h3>
+                        <form action="#" method="POST" id="main-contact-form">
+                            <div class="mb-4">
+                                <label for="main-name" class="block text-[#515154] mb-2 text-sm">Full Name</label>
+                                <input type="text" id="main-name" name="name" class="w-full px-3 py-2 rounded-lg focus:outline-none">
+                            </div>
+                            <div class="mb-4">
+                                <label for="main-email" class="block text-[#515154] mb-2 text-sm">Email Address</label>
+                                <input type="email" id="main-email" name="email" class="w-full px-3 py-2 rounded-lg focus:outline-none" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="main-phone" class="block text-[#515154] mb-2 text-sm">Phone Number</label>
+                                <input type="tel" id="main-phone" name="phone" class="w-full px-3 py-2 rounded-lg focus:outline-none">
+                            </div>
+                            <div class="mb-6">
+                                <label for="main-message" class="block text-[#515154] mb-2 text-sm">Message</label>
+                                <textarea id="main-message" name="message" rows="4" class="w-full px-3 py-2 rounded-lg focus:outline-none" required></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-md border border-gray-200">
+                        <h3 class="text-xl text-[#1D1D1F] mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-[#0A84FF] mr-3 mt-1 text-lg"><i class="fas fa-map-marker-alt"></i></span>
+                                <div>
+                                    <h4 class="text-[#333333]">Address:</h4>
+                                    <p class="text-[#515154]">123 Luxury Avenue, Prime City, India 400001</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-[#0A84FF] mr-3 mt-1 text-lg"><i class="fas fa-phone-alt"></i></span>
+                                <div>
+                                    <h4 class="text-[#333333]">Phone:</h4>
+                                    <p class="text-[#515154]">+91 98765 43210</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-[#0A84FF] mr-3 mt-1 text-lg"><i class="fas fa-envelope"></i></span>
+                                <div>
+                                    <h4 class="text-[#333333]">Email:</h4>
+                                    <p class="text-[#515154]">info@globaloneconsulting.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-[#0A84FF] mr-3 mt-1 text-lg"><i class="fas fa-clock"></i></span>
+                                <div>
+                                    <h4 class="text-[#333333]">Business Hours:</h4>
+                                    <p class="text-[#515154]">Mon - Fri: 9 AM - 6 PM</p>
+                                    <p class="text-[#515154]">Sat: 10 AM - 4 PM</p>
+                                    <p class="text-[#515154]">Sun: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Popup Modal -->
+    <div id="contact-popup-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[1100] hidden">
+        <div id="contact-popup-modal-content" class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-4xl w-11/12 md:w-full mx-4 relative max-h-[90vh] overflow-y-auto">
+            <button id="close-contact-popup-btn" class="absolute top-3 right-3 md:top-4 md:right-4 text-[#86868B] hover:text-[#1D1D1F] text-3xl leading-none font-bold">×</button>
+            <div class="text-center mb-6 md:mb-8">
+                <h2 class="text-2xl md:text-3xl text-[#1D1D1F] mb-3 md:mb-4">Quick Enquiry</h2>
+                <div class="w-20 h-1 bg-[#D2D2D7] mx-auto mb-4 md:mb-6"></div>
+                <p class="text-[#515154] text-sm md:text-base max-w-2xl mx-auto">Fill out this form for a quick response from our team.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-[#FBFBFD] p-4 md:p-6 rounded-lg shadow-sm contact-form border border-gray-200">
+                    <h3 class="text-lg md:text-xl text-[#1D1D1F] mb-3 md:mb-4">Send Us a Message</h3>
+                    <form action="#" method="POST" id="popup-contact-form-actual">
+                        <div class="mb-3">
+                            <label for="popup-name" class="block text-[#515154] mb-1 text-xs md:text-sm">Full Name</label>
+                            <input type="text" id="popup-name" name="name" class="w-full rounded-lg focus:outline-none">
+                        </div>
+                        <div class="mb-3">
+                            <label for="popup-email" class="block text-[#515154] mb-1 text-xs md:text-sm">Email Address</label>
+                            <input type="email" id="popup-email" name="email" class="w-full rounded-lg focus:outline-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="popup-phone" class="block text-[#515154] mb-1 text-xs md:text-sm">Phone Number</label>
+                            <input type="tel" id="popup-phone" name="phone" class="w-full rounded-lg focus:outline-none">
+                        </div>
+                        <div class="mb-4">
+                            <label for="popup-message" class="block text-[#515154] mb-1 text-xs md:text-sm">Message</label>
+                            <textarea id="popup-message" name="message" rows="3" class="w-full rounded-lg focus:outline-none" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-[#FBFBFD] p-4 md:p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg md:text-xl text-[#1D1D1F] mb-3 md:mb-4">Contact Information</h3>
+                    <div class="space-y-3 md:space-y-4 text-xs md:text-sm">
+                         <div class="flex items-start"> <span class="text-[#0A84FF] mr-2 md:mr-3 mt-1 text-base md:text-lg"><i class="fas fa-map-marker-alt"></i></span> <div> <h4 class="text-[#333333]">Address:</h4> <p class="text-[#515154]">123 Luxury Avenue, Prime City, India 400001</p> </div> </div>
+                        <div class="flex items-start"> <span class="text-[#0A84FF] mr-2 md:mr-3 mt-1 text-base md:text-lg"><i class="fas fa-phone-alt"></i></span> <div> <h4 class="text-[#333333]">Phone:</h4> <p class="text-[#515154]">+91 98765 43210</p> </div> </div>
+                        <div class="flex items-start"> <span class="text-[#0A84FF] mr-2 md:mr-3 mt-1 text-base md:text-lg"><i class="fas fa-envelope"></i></span> <div> <h4 class="text-[#333333]">Email:</h4> <p class="text-[#515154]">info@globaloneconsulting.com</p> </div> </div>
+                        <div class="flex items-start"> <span class="text-[#0A84FF] mr-2 md:mr-3 mt-1 text-base md:text-lg"><i class="fas fa-clock"></i></span> <div> <h4 class="text-[#333333]">Business Hours:</h4> <p class="text-[#515154]">Mon - Fri: 9 AM - 6 PM</p> <p class="text-[#515154]">Sat: 10 AM - 4 PM</p> <p class="text-[#515154]">Sun: Closed</p> </div> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#FBFBFD] text-[#515154] py-12 border-t border-gray-200"> <!-- Light footer bg -->
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div> <h3 class="text-xl text-[#1D1D1F] mb-4">GlobalOne Consulting</h3> <p class="text-sm text-[#86868B]">Your trusted partner in luxury real estate investments. Project Ananta is our commitment to excellence and unparalleled returns.</p> </div>
+                <div> <h3 class="text-xl text-[#1D1D1F] mb-4">Quick Links</h3> <ul class="space-y-2"> <li><a href="#about" class="text-[#515154] hover:text-[#0A84FF] transition">About Us</a></li> <li><a href="#project" class="text-[#515154] hover:text-[#0A84FF] transition">Project Ananta</a></li> <li><a href="#amenities" class="text-[#515154] hover:text-[#0A84FF] transition">Amenities</a></li> <li><a href="#faq" class="text-[#515154] hover:text-[#0A84FF] transition">FAQ</a></li> <li><a href="#contact" class="text-[#515154] hover:text-[#0A84FF] transition">Contact</a></li> </ul> </div>
+                <div> <h3 class="text-xl text-[#1D1D1F] mb-4">Follow Us</h3> <div class="flex space-x-4"> <a href="#" class="text-[#515154] hover:text-[#0A84FF] transition text-2xl"><i class="fab fa-facebook-f"></i></a> <a href="#" class="text-[#515154] hover:text-[#0A84FF] transition text-2xl"><i class="fab fa-twitter"></i></a> <a href="#" class="text-[#515154] hover:text-[#0A84FF] transition text-2xl"><i class="fab fa-instagram"></i></a> <a href="#" class="text-[#515154] hover:text-[#0A84FF] transition text-2xl"><i class="fab fa-linkedin-in"></i></a> </div> </div>
+            </div>
+            <div class="border-t border-[#E5E5E7] pt-8 text-center text-sm text-[#86868B]">
+                <p>© <span id="currentYear"></span> Global One Consulting. All Rights Reserved.</p>
+                <p>Designed with <i class="fas fa-heart text-red-500"></i> for discerning investors.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top"> <i class="fas fa-arrow-up"></i> </div>
+
+    <!-- Investment Calculator Modal -->
+    <div id="investment-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[1060] hidden">
+        <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full mx-4 border border-gray-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl text-[#1D1D1F]">Investment Calculator</h3>
+                <button id="close-investment-modal-btn" class="text-[#86868B] hover:text-[#1D1D1F] text-2xl">×</button>
+            </div>
+            <div>
+                <p class="text-[#333333] mb-4">Estimate your potential returns with Project Ananta.</p>
+                <label for="investment-amount" class="block text-sm text-[#515154]">Investment Amount (₹)</label>
+                <input type="number" id="investment-amount" name="investment-amount" class="mt-1 block w-full p-2 rounded-md shadow-sm" placeholder="e.g., 3250000">
+                <label for="expected-roi" class="block text-sm text-[#515154] mt-4">Expected Annual ROI (%)</label>
+                <input type="number" id="expected-roi" name="expected-roi" value="9.2" class="mt-1 block w-full p-2 rounded-md shadow-sm">
+                <button id="calculate-investment-button" class="mt-6 w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-2 px-4 rounded-lg">Calculate</button>
+                <div id="calculation-result" class="mt-4 text-lg text-center">
+                    <!-- Results will be injected here. -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Login/Sign Up) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[1070] hidden">
+        <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full mx-4 relative border border-gray-200">
+            <button id="close-auth-modal-btn" class="absolute top-3 right-4 text-[#86868B] hover:text-[#1D1D1F] text-3xl leading-none font-bold">×</button>
+
+            <div id="login-form-container" class="auth-form">
+                <h3 class="text-2xl text-[#1D1D1F] mb-6 text-center">Login</h3>
+                <form id="login-form">
+                    <div class="mb-4">
+                        <label for="login-email" class="block text-[#515154] mb-2 text-sm">Email or Username</label>
+                        <input type="text" id="login-email" name="login-email" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="login-password" class="block text-[#515154] mb-2 text-sm">Password</label>
+                        <input type="password" id="login-password" name="login-password" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="text-right mb-6">
+                        <a href="#" class="text-sm text-[#0A84FF] hover:underline">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out">Login</button>
+                    </div>
+                    <p class="text-center text-sm text-[#515154] mt-6">
+                        Don't have an account? <a href="#" id="show-signup-form-link" class="text-[#0A84FF] hover:underline font-semibold">Sign Up</a>
+                    </p>
+                </form>
+            </div>
+
+            <div id="signup-form-container" class="auth-form hidden">
+                <h3 class="text-2xl text-[#1D1D1F] mb-6 text-center">Sign Up</h3>
+                <form id="signup-form">
+                    <div class="mb-4">
+                        <label for="signup-name" class="block text-[#515154] mb-2 text-sm">Full Name</label>
+                        <input type="text" id="signup-name" name="signup-name" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="signup-email" class="block text-[#515154] mb-2 text-sm">Email Address</label>
+                        <input type="email" id="signup-email" name="signup-email" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="signup-password" class="block text-[#515154] mb-2 text-sm">Password</label>
+                        <input type="password" id="signup-password" name="signup-password" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="signup-confirm-password" class="block text-[#515154] mb-2 text-sm">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" name="signup-confirm-password" class="w-full px-4 py-2 rounded-lg" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-[#0A84FF] hover:bg-[#0071E3] text-white py-3 px-6 rounded-lg transition duration-300 ease-in-out">Sign Up</button>
+                    </div>
+                     <p class="text-center text-sm text-[#515154] mt-6">
+                        Already have an account? <a href="#" id="show-login-form-link" class="text-[#0A84FF] hover:underline font-semibold">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button'); 
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+            let scrollLockers = 0;
+
+            function requestScrollLock() {
+                scrollLockers++;
+                if (scrollLockers === 1) {
+                    document.body.classList.add('body-no-scroll');
+                }
+            }
+
+            function releaseScrollLock() {
+                scrollLockers--;
+                if (scrollLockers <= 0) {
+                    document.body.classList.remove('body-no-scroll');
+                    scrollLockers = 0;
+                }
+            }
+
+            function openSidebar() {
+                if (mobileMenu) mobileMenu.classList.add('open');
+                if (sidebarOverlay) sidebarOverlay.classList.add('active');
+                requestScrollLock();
+            }
+
+            function closeSidebar() {
+                if (mobileMenu) mobileMenu.classList.remove('open');
+                if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+                releaseScrollLock();
+            }
+
+            if (mobileMenuButton) mobileMenuButton.addEventListener('click', openSidebar);
+            if (closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', closeSidebar);
+            if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+            const scrollToTopButton = document.querySelector('.scroll-to-top');
+            if (scrollToTopButton) {
+                window.addEventListener('scroll', () => {
+                    scrollToTopButton.classList.toggle('visible', window.pageYOffset > 300);
+                });
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', () => {
+                        const currentlyActive = item.classList.contains('active');
+                        item.classList.toggle('active');
+                    });
+                }
+            });
+
+            const unitTypeTabs = document.querySelectorAll('.unit-type-tab');
+            const unitTypeContents = document.querySelectorAll('.unit-type-content');
+            unitTypeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    unitTypeTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.dataset.target;
+                    unitTypeContents.forEach(content => {
+                        content.classList.toggle('active', content.id === targetId);
+                    });
+                });
+            });
+
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16); 
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        element.textContent = target.toLocaleString('en-IN');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.ceil(start).toLocaleString('en-IN');
+                    }
+                }, 16);
+                 if (target === 0) element.textContent = '0';
+            }
+            const counters = document.querySelectorAll('.counter-value');
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            counters.forEach(counter => counterObserver.observe(counter));
+
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            const progressBarObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.dataset.width;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            progressBars.forEach(bar => progressBarObserver.observe(bar));
+
+            const slider = document.getElementById('amenities-slider');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+            const sliderDots = document.querySelectorAll('.slider-dot');
+            if (slider && prevButton && nextButton && sliderDots.length > 0) {
+                let currentIndex = 0;
+                const totalSlides = slider.children.length;
+                function updateSlider() {
+                    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    sliderDots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+                nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
+                prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
+                sliderDots.forEach(dot => { dot.addEventListener('click', () => { currentIndex = parseInt(dot.dataset.index); updateSlider(); }); });
+                Array.from(slider.children).forEach(child => child.style.minWidth = '100%');
+                updateSlider();
+            }
+
+            const openInvestmentModalButton = document.getElementById('open-investment-modal');
+            const closeInvestmentModalButton = document.getElementById('close-investment-modal-btn');
+            const investmentModal = document.getElementById('investment-modal');
+            const calculateInvestmentButton = document.getElementById('calculate-investment-button');
+            const investmentAmountInput = document.getElementById('investment-amount');
+            const expectedRoiInput = document.getElementById('expected-roi');
+            const calculationResultDiv = document.getElementById('calculation-result');
+
+            if (openInvestmentModalButton && investmentModal && closeInvestmentModalButton) {
+                openInvestmentModalButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    investmentModal.classList.remove('hidden');
+                    requestScrollLock();
+                });
+                closeInvestmentModalButton.addEventListener('click', () => {
+                    investmentModal.classList.add('hidden');
+                    releaseScrollLock();
+                });
+                investmentModal.addEventListener('click', (e) => {
+                    if (e.target === investmentModal) {
+                        investmentModal.classList.add('hidden');
+                        releaseScrollLock();
+                    }
+                });
+            }
+
+            if (calculateInvestmentButton && investmentAmountInput && expectedRoiInput && calculationResultDiv) {
+                calculateInvestmentButton.addEventListener('click', () => {
+                    const amount = parseFloat(investmentAmountInput.value);
+                    const roi = parseFloat(expectedRoiInput.value);
+                    calculationResultDiv.innerHTML = '';
+                    if (isNaN(amount) || amount <= 0) { calculationResultDiv.innerHTML += '<p class="text-red-500">Please enter a valid investment amount.</p>'; return; }
+                    if (isNaN(roi) || roi <= 0) { calculationResultDiv.innerHTML += '<p class="text-red-500">Please enter a valid ROI percentage.</p>'; return; }
+                    const annualReturn = (amount * roi) / 100;
+                    const monthlyReturn = annualReturn / 12;
+                    calculationResultDiv.innerHTML = `
+                        <p class="text-[#28A745]">Annual Return: ₹${annualReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                        <p class="text-[#28A745]">Monthly Return: ₹${monthlyReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    `;
+                });
+            }
+
+            const authModal = document.getElementById('auth-modal');
+            const closeAuthModalButton = document.getElementById('close-auth-modal-btn');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const signupFormContainer = document.getElementById('signup-form-container');
+            const showSignupFormLink = document.getElementById('show-signup-form-link');
+            const showLoginFormLink = document.getElementById('show-login-form-link');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            function openAuthModal(formType = 'login') {
+                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                    closeSidebar(); 
+                }
+                if(authModal) {
+                    authModal.classList.remove('hidden');
+                    if (formType === 'signup') {
+                        loginFormContainer.classList.add('hidden');
+                        signupFormContainer.classList.remove('hidden');
+                    } else {
+                        loginFormContainer.classList.remove('hidden');
+                        signupFormContainer.classList.add('hidden');
+                    }
+                    requestScrollLock();
+                }
+            }
+
+            function closeAuthModal() {
+                if(authModal) {
+                    authModal.classList.add('hidden');
+                    releaseScrollLock();
+                }
+            }
+
+            if (authModal) {
+                closeAuthModalButton?.addEventListener('click', closeAuthModal);
+                authModal.addEventListener('click', (e) => {
+                    if (e.target === authModal) closeAuthModal();
+                });
+
+                showSignupFormLink?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loginFormContainer.classList.add('hidden');
+                    signupFormContainer.classList.remove('hidden');
+                });
+                showLoginFormLink?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    signupFormContainer.classList.add('hidden');
+                    loginFormContainer.classList.remove('hidden');
+                });
+
+                loginForm?.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    console.log('Login form submitted (simulated)');
+                    alert('Login Successful (Simulated)!');
+                    closeAuthModal();
+                });
+
+                signupForm?.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const password = signupForm.querySelector('#signup-password').value;
+                    const confirmPassword = signupForm.querySelector('#signup-confirm-password').value;
+
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match!");
+                        return;
+                    }
+                    console.log('Sign Up form submitted (simulated)');
+                    alert('Sign Up Successful (Simulated)! Please login.');
+                    showLoginFormLink.click(); 
+                });
+            }
+
+            const viewMoreGalleryButton = document.getElementById('view-more-gallery');
+            if (viewMoreGalleryButton) {
+                viewMoreGalleryButton.addEventListener('click', () => {
+                    alert('More gallery images would be displayed here. This is a placeholder for further development.');
+                });
+            }
+
+            const contactPopupModal = document.getElementById('contact-popup-modal');
+            const closeContactPopupBtn = document.getElementById('close-contact-popup-btn');
+            const popupContactFormActual = document.getElementById('popup-contact-form-actual');
+            let popupTimeout;
+
+            function openContactPopup() {
+                if (contactPopupModal && contactPopupModal.classList.contains('hidden')) {
+                    contactPopupModal.classList.remove('hidden');
+                    requestScrollLock();
+                }
+            }
+
+            function closeContactPopup() {
+                if (contactPopupModal && !contactPopupModal.classList.contains('hidden')) {
+                    contactPopupModal.classList.add('hidden');
+                    releaseScrollLock();
+                }
+                 if (popupTimeout) clearTimeout(popupTimeout);
+            }
+
+            if (contactPopupModal && closeContactPopupBtn) {
+                popupTimeout = setTimeout(() => {
+                    if ( (!authModal || authModal.classList.contains('hidden')) && 
+                         (!investmentModal || investmentModal.classList.contains('hidden')) ) {
+                       openContactPopup();
+                    }
+                }, 7000); 
+
+                closeContactPopupBtn.addEventListener('click', closeContactPopup);
+                contactPopupModal.addEventListener('click', (e) => {
+                    if (e.target === contactPopupModal) { 
+                        closeContactPopup();
+                    }
+                });
+            }
+
+            if (popupContactFormActual) {
+                popupContactFormActual.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const nameInput = popupContactFormActual.querySelector('#popup-name');
+                    const emailInput = popupContactFormActual.querySelector('#popup-email');
+                    const messageInput = popupContactFormActual.querySelector('#popup-message');
+
+                    if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
+                        alert('Please fill in Name, Email, and Message fields in the popup form.');
+                        return;
+                    }
+                    console.log('Popup Contact Form Data:', {
+                        name: nameInput.value.trim(),
+                        email: emailInput.value.trim(),
+                        phone: popupContactFormActual.querySelector('#popup-phone').value.trim(),
+                        message: messageInput.value.trim()
+                    });
+                    alert('Popup contact form submitted (simulated). Thank you!');
+                    this.reset();
+                    closeContactPopup();
+                });
+            }
+            
+            const mainContactFormEl = document.getElementById('main-contact-form');
+            if (mainContactFormEl) {
+                mainContactFormEl.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = {
+                        name: this.querySelector('#main-name').value.trim(),
+                        email: this.querySelector('#main-email').value.trim(),
+                        phone: this.querySelector('#main-phone').value.trim(),
+                        message: this.querySelector('#main-message').value.trim()
+                    };
+                    if (!formData.name || !formData.email || !formData.message) {
+                        alert('Please fill in Name, Email, and Message fields.');
+                        return;
+                    }
+                    console.log('Main Contact Form Data:', formData);
+                    alert('Main contact form submitted (simulated). Thank you!');
+                    this.reset();
+                });
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    const isMobileMenuLink = this.classList.contains('mobile-menu-link') || this.closest('#mobile-menu');
+
+                    if (href.startsWith('#') && href.length > 1) {
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            e.preventDefault();
+                            if (isMobileMenuLink && mobileMenu && mobileMenu.classList.contains('open')) {
+                                closeSidebar();
+                                setTimeout(() => { 
+                                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                                }, 300); 
+                            } else {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }
+                    }
+                });
+            });
+
+            const currentYearSpan = document.getElementById('currentYear');
+            if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

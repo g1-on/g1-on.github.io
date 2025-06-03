@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global One Consulting - Project Ananta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       :root {
+            --apple-blue: #007AFF;
+            --apple-blue-hover: #0056b3;
+            --brand-gold-original: #9c7c38; /* Kept for reference or very specific branding */
+            --light-gray-bg: #F5F5F7;
+            --text-primary: #1D1D1F;
+            --text-secondary: #515154;
+            --border-color: #D1D5DB; /* Tailwind gray-300 equivalent */
+        }
+
+       body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-primary);
+            background-color: #FFFFFF;
+            font-weight: 400; /* Changed from 200 */
+            line-height: 1.6; /* Added for better readability */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 200; /* Default for headings */
+            color: var(--text-primary);
+        }
+        /* Removed text-transform: uppercase from body */
+
+        p, span, div, li, a, label, legend, th, td, button, input, textarea, select {
+            font-weight: inherit;
+        }
+
+        strong, b {
+            font-weight: 600; /* Changed from 700 for a slightly softer bold */
+        }
+
+        .hero-bg_wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .hero-bg_wrap video, .hero-bg_wrap .img-cover { width: 100%; height: 100%; object-fit: cover; }
+        .hero-bg_wrap-cols { display: flex; width: 100%; height: 100%; }
+        .hero-bg_wrap-col { flex: 1; overflow: hidden; position: relative; }
+        .hero-bg_wrap-slides { height: 100%; }
+        .hero-bg_wrap_slide { height: auto; margin-bottom: 10px; }
+        .hero-bg_wrap_slide picture, .hero-bg_wrap_slide img { display: block; width: 100%; }
+        .hero-bg-gradient_overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+        input[type="file"]::file-selector-button {
+            @apply mr-4 py-2 px-4 rounded-md border border-[var(--border-color)] text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer;
+        }
+
+        .feature-icon {
+            background-color: #E9E9EA; /* Lighter Gray */
+            height: 70px;
+            width: 70px;
+            border-radius: 18px; /* Squircle shape */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--apple-blue);
+            font-size: 1.8rem;
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: var(--apple-blue); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+
+        .scroll-to-top { position: fixed; bottom: 20px; right: 20px; background-color: var(--apple-blue); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s ease; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .scroll-to-top.visible { opacity: 1; }
+        .scroll-to-top:hover { background-color: var(--apple-blue-hover); }
+
+        .counter-value { font-family: 'Montserrat', sans-serif; font-weight: 600; } /* Adjusted weight */
+
+        #mobile-menu {
+            position: fixed; top: 0; left: 0; width: 280px; max-width: 80vw; height: 100vh;
+            background-color: #FFFFFF;
+            padding-top: 1rem; box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%); transition: transform 0.3s ease-in-out;
+            z-index: 1050; overflow-y: auto;
+        }
+        #mobile-menu.open { transform: translateX(0); }
+        #mobile-menu a {
+            display: block; padding: 0.85rem 1.5rem; color: var(--text-primary);
+            transition: color 0.2s ease, background-color 0.2s ease;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: none; /* Ensure sentence case */
+        }
+        #mobile-menu a:hover { color: var(--apple-blue); background-color: #F9FAFB; /* gray-50 */ }
+        #mobile-menu a:last-child { border-bottom: none; }
+        #close-mobile-menu { position: absolute; top: 1rem; right: 1rem; font-size: 1.75rem; line-height: 1; cursor: pointer; color: #6B7280; /* gray-500 */ }
+        #close-mobile-menu:hover { color: var(--apple-blue); }
+        #sidebar-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.4); z-index: 1040; display: none; }
+        #sidebar-overlay.active { display: block; }
+        .body-no-scroll { overflow: hidden; }
+
+        .amenity-card { transition: all 0.3s ease; border: 1px solid transparent; border-radius: 12px; background-color: white; }
+        .amenity-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); border-color: var(--border-color); }
+        .gallery-img { height: 250px; object-fit: cover; transition: transform 0.3s ease; border-radius: 8px; }
+        .gallery-img:hover { transform: scale(1.03); }
+
+        .contact-form input, .contact-form textarea,
+        .auth-form input, #investment-modal input {
+            border: 1px solid var(--border-color);
+            background-color: #F9FAFB; /* Slightly off-white for inputs */
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            border-radius: 8px; /* More rounded */
+            padding: 0.65rem 0.9rem; /* Adjusted padding */
+        }
+        .contact-form input:focus, .contact-form textarea:focus,
+        .auth-form input:focus, #investment-modal input:focus {
+            border-color: var(--apple-blue);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+            outline: none;
+        }
+        #contact-popup-modal-content .contact-form input,
+        #contact-popup-modal-content .contact-form textarea {
+            font-size: 0.875rem;
+            padding: 0.65rem 0.9rem;
+        }
+
+        .testimonial-card { transition: all 0.3s ease; border-radius: 12px; }
+        .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); }
+        .timeline-item { position: relative; padding-left: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background-color: var(--apple-blue); }
+        .timeline-item::after { content: ''; position: absolute; left: -4px; top: 0; height: 10px; width: 10px; border-radius: 50%; background-color: var(--apple-blue); }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
+        .faq-question { cursor: pointer; transition: all 0.3s ease; padding: 1rem 0; }
+        .faq-question:hover h3 { color: var(--apple-blue); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; color: var(--text-secondary); padding-bottom: 1rem; }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-toggle { transition: transform 0.3s ease; color: var(--apple-blue); }
+        .faq-item.active .faq-toggle { transform: rotate(180deg); }
+
+        .unit-type-tab {
+            cursor: pointer; transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary); /* Darker gray for inactive tab text */
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+        }
+        .unit-type-tab.active { background-color: var(--apple-blue); color: white; border-color: var(--apple-blue); }
+        .unit-type-tab:hover:not(.active) { background-color: #F9FAFB; border-color: #adb5bd;}
+        .unit-type-content { display: none; }
+        .unit-type-content.active { display: block; }
+
+        .progress-bar {
+            height: 8px; background-color: #E9ECEF; /* Lighter gray for track */
+            border-radius: 4px; overflow: hidden;
+        }
+        .progress-bar-fill { height: 100%; background-color: var(--apple-blue); border-radius: 4px; transition: width 1.5s ease; }
+        .slider-dot { background-color: #CED4DA; /* Inactive dot color - light gray */ }
+        .slider-dot.active { background-color: var(--apple-blue); }
+
+        /* General Button Style */
+        .btn-apple {
+            @apply py-2.5 px-6 rounded-lg text-base font-medium transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2;
+            text-transform: none; /* Ensure sentence case */
+        }
+        .btn-apple-primary {
+            @apply bg-[var(--apple-blue)] text-white hover:bg-[var(--apple-blue-hover)] focus:ring-[var(--apple-blue)];
+        }
+        .btn-apple-secondary {
+            @apply bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400;
+        }
+        .btn-apple-link { /* For text-like buttons */
+             @apply text-[var(--apple-blue)] hover:text-[var(--apple-blue-hover)] font-medium;
+        }
+
+    </style>
+</head>
+<body class="text-base"> <!-- Added text-base for Tailwind default font size -->
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-blur-md shadow-sm sticky top-0 z-50"> <!-- Adjusted shadow and added backdrop-blur -->
+       <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                  <a href="/" aria-label="Global One Homepage" class="flex items-center">
+                  <img src="images/global one  5.png" class="h-12 mr-3"> <!-- Slightly smaller logo -->
+                <img src="images/Untitled-1.png" class="h-10 mr-3">
+                </a>
+            </div>
+
+            <div>
+                <button id="mobile-menu-button" class="text-gray-700 hover:text-[var(--apple-blue)] focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Menu -->
+    <div id="mobile-menu">
+        <button id="close-mobile-menu">×</button>
+        <a href="#home" class="mobile-menu-link">Home</a>
+        <a href="#about" class="mobile-menu-link">About Ananta</a>
+        <a href="#project" class="mobile-menu-link">Project Details</a>
+        <a href="#amenities" class="mobile-menu-link">Amenities</a>
+        <a href="#gallery" class="mobile-menu-link">Gallery</a>
+        <a href="#location" class="mobile-menu-link">Location</a>
+        <a href="#faq" class="mobile-menu-link">FAQ</a>
+        <a href="#contact" class="mobile-menu-link">Contact</a>
+        <a href="#" id="mobile-nav-login-btn" class="mobile-menu-link">Login</a>
+        <a href="#" id="mobile-nav-signup-btn" class="mobile-menu-link">Sign Up</a>
+    </div>
+
+    <div id="sidebar-overlay"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section h-screen flex items-center justify-center" style="position: relative;">
+        <div class="hero-bg_wrap z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="images/3648257-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="absolute inset-0 bg-black opacity-40 z-[1]"></div> <!-- Darker overlay for text contrast -->
+        <div class="container mx-auto px-4 text-center relative z-[2]">
+            <h1 class="text-white text-8xl md:text-1xl font-EXTRA LIGHT mb-5 capitalize">Project Ananta</h1> <!-- Changed color, size, weight, case -->
+            <p class="text-gray-200 text-lg md:text-xl mb-10 max-w-3xl mx-auto">Redefining Luxury Living with 5-Star Pre-Leased Service Apartments</p> <!-- Lighter gray -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="Why Choose Project Ananta (5).pdf" target="_blank" class="btn-apple bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white inline-flex items-center">
+                    <i class="fas fa-download mr-2"></i> Download Investment Plan
+                </a>
+                <a href="#project" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fa-solid fa-play text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-[var(--light-gray-bg)]">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-gray-800 mb-2" data-target="5">0</div>
+                    <p class="text-gray-600 capitalize">Luxury Towers</p>
+                </div>
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-gray-800 mb-2" data-target="466">0</div>
+                    <p class="text-gray-600 capitalize">Units Per Tower</p>
+                </div>
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-gray-800 mb-2" data-target="24">0</div>
+                    <p class="text-gray-600 capitalize">Months to Possession</p>
+                </div>
+                <div class="p-4">
+                    <div class="counter-value text-4xl text-gray-800 mb-2" data-target="15">0</div>
+                    <p class="text-gray-600 capitalize">Days Complimentary Stay</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold mb-4 capitalize">Global One Consulting</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">Global One Consulting is a premier real estate development firm specializing in luxury properties that combine comfort, elegance, and investment potential. Our flagship project, Ananta, represents our commitment to creating exceptional living spaces with unparalleled amenities and services.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="py-10 text-center">
+                    <div class="feature-icon"> <i class="fas fa-building"></i> </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 capitalize">Premium Developments</h3>
+                    <p class="text-var(--text-secondary) px-4">We create luxury properties that stand as landmarks of architectural excellence and comfort.</p>
+                </div>
+                <div class="p-8 text-center">
+                    <div class="feature-icon"> <i class="fas fa-chart-line"></i> </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 capitalize">Investment Opportunities</h3>
+                    <p class="text-var(--text-secondary) px-4">Our properties offer exceptional investment potential with guaranteed returns and buyback options.</p>
+                </div>
+                <div class="p-8 text-center">
+                    <div class="feature-icon"> <i class="fas fa-handshake"></i> </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 capitalize">Customer Satisfaction</h3>
+                    <p class="text-var(--text-secondary) px-4">We prioritize client relationships, ensuring transparency and satisfaction at every step.</p>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-semibold text-gray-900 mb-6 capitalize">Our Vision & Mission</h3>
+                        <p class="text-var(--text-secondary) mb-6 text-lg">At Global One Consulting, we envision a world where luxury living is accessible to discerning investors who seek both comfort and financial growth. Our mission is to develop properties that serve as both exceptional living spaces and sound investment vehicles.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-gray-800 mb-2 capitalize font-medium">Quality Construction</h4>
+                                <div class="progress-bar"> <div class="progress-bar-fill" data-width="95%" style="width: 0;"></div> </div>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-800 mb-2 capitalize font-medium">Customer Satisfaction</h4>
+                                <div class="progress-bar"> <div class="progress-bar-fill" data-width="98%" style="width: 0;"></div> </div>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-800 mb-2 capitalize font-medium">Investment Returns</h4>
+                                <div class="progress-bar"> <div class="progress-bar-fill" data-width="92%" style="width: 0;"></div> </div>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-800 mb-2 capitalize font-medium">Amenities & Services</h4>
+                                <div class="progress-bar"> <div class="progress-bar-fill" data-width="97%" style="width: 0;"></div> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="p-8 rounded-xl bg-gray-50"> <!-- Added bg for visual separation -->
+                            <h3 class="text-3xl font-semibold text-gray-900 mb-6 capitalize">Company Timeline</h3>
+                            <div class="space-y-8">
+                                <div class="timeline-item pl-8">
+                                    <h4 class="text-gray-800 font-medium">2010</h4>
+                                    <p class="text-var(--text-secondary)">Global One Consulting was founded with a vision to transform luxury real estate.</p>
+                                </div>
+                                <div class="timeline-item pl-8">
+                                    <h4 class="text-gray-800 font-medium">2015</h4>
+                                    <p class="text-var(--text-secondary)">Completed our first major luxury development project with 100% occupancy.</p>
+                                </div>
+                                 <div class="timeline-item pl-8">
+                                    <h4 class="text-gray-800 font-medium">2022</h4>
+                                    <p class="text-var(--text-secondary)">Launched Project Ananta, our most ambitious and luxurious development to date.</p>
+                                </div>
+                                <div class="timeline-item pl-8">
+                                    <h4 class="text-gray-800 font-medium">2023</h4>
+                                    <p class="text-var(--text-secondary)">Began pre-leasing of Ananta units with unprecedented investor interest.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Project Details Section -->
+    <section id="project" class="py-16 bg-[var(--light-gray-bg)]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 capitalize">Project Ananta Details</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">A rare approved luxury 5-star pre-leased service apartment complex offering premium living with exceptional investment benefits.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="p-8 bg-white rounded-xl shadow-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-[var(--apple-blue)] capitalize">Project Highlights</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>5 Towers</strong> of luxury service apartments</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>466 Units</strong> in each tower (460 premium suites)</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Unit Sizes:</strong> 50 sqm and 85 sqm</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Launch Price:</strong> ₹32,50,000 (for premium suites only)</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-check-circle"></i></span> <span><strong>Monthly Rental:</strong> ₹25,000</span> </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-8 bg-white rounded-xl shadow-sm mt-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-[var(--apple-blue)] capitalize">Investment Benefits</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-gem"></i></span> <span>Lifetime free maintenance</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-gem"></i></span> <span>Safe investment with buyback guaranteed program</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-gem"></i></span> <span>15 days complimentary stay per year</span> </li>
+                            <li class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3"><i class="fas fa-gem"></i></span> <span>Complimentary food & beverages during stay</span> </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-[var(--apple-blue)] transform -rotate-3 rounded-lg opacity-50"></div>
+                        <div class="relative bg-white p-6 md:p-8 rounded-xl shadow-lg z-10">
+                            <svg class="w-full h-auto max-h-64 mb-6" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="100" y="50" width="400" height="300" fill="#F0F0F0" rx="10" />
+                                <rect x="120" y="70" width="360" height="260" fill="#FAFAFA" rx="5"/>
+                                <g fill="#D1D5DB">
+                                    <rect x="140" y="90" width="30" height="40" rx="2"/> <rect x="140" y="140" width="30" height="40" rx="2"/> <rect x="140" y="190" width="30" height="40" rx="2"/> <rect x="140" y="240" width="30" height="40" rx="2"/> <rect x="140" y="290" width="30" height="40" rx="2"/>
+                                    <rect x="190" y="90" width="30" height="40" rx="2"/> <rect x="190" y="140" width="30" height="40" rx="2"/> <rect x="190" y="190" width="30" height="40" rx="2"/> <rect x="190" y="240" width="30" height="40" rx="2"/> <rect x="190" y="290" width="30" height="40" rx="2"/>
+                                </g>
+                                <rect x="90" y="40" width="420" height="10" fill="var(--apple-blue)" rx="3"/>
+                                <polygon points="300,10 90,40 510,40" fill="var(--apple-blue)" />
+                                <rect x="0" y="350" width="600" height="50" fill="#E9ECEF" />
+                                <text x="300" y="380" font-family="Montserrat, Arial, sans-serif" font-size="20" font-weight="500" text-anchor="middle" fill="var(--apple-blue)" class="uppercase">Project Ananta</text>
+                            </svg>
+                            <div class="space-y-5 text-gray-800">
+                                <div class="flex items-center justify-between border-b border-gray-200 pb-3"> <span class="text-var(--text-secondary)">Project Type</span> <span class="font-medium text-gray-900">5-Star Service Apartments</span> </div>
+                                <div class="flex items-center justify-between border-b border-gray-200 pb-3"> <span class="text-var(--text-secondary)">Total Towers</span> <span class="font-medium text-gray-900">5</span> </div>
+                                <div class="flex items-center justify-between border-b border-gray-200 pb-3"> <span class="text-var(--text-secondary)">Units per Tower</span> <span class="font-medium text-gray-900">466</span> </div>
+                                <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Expected ROI</span> <span class="font-medium text-[var(--apple-blue)]">9.2% annually</span> </div>
+                            </div>
+                            <button id="open-investment-modal" class="mt-8 w-full btn-apple btn-apple-primary flex items-center justify-center"> <i class="fas fa-calculator mr-2"></i> Calculate Investment Returns </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <h3 class="text-3xl font-semibold text-gray-900 mb-8 text-center capitalize">Available Unit Types</h3>
+                <div class="flex flex-wrap justify-center mb-6 gap-3">
+                    <div class="unit-type-tab active" data-target="premium-50"> Premium Suite (50 sqm) </div>
+                    <div class="unit-type-tab" data-target="premium-85"> Premium Suite (85 sqm) </div>
+                </div>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+                    <div id="premium-50" class="unit-type-content active">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <svg class="w-full h-auto max-h-72 mb-6" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="300" fill="#F9FAFB" rx="10"/> <rect x="50" y="50" width="300" height="200" fill="none" stroke="var(--apple-blue)" stroke-width="3" rx="5"/>
+                                    <rect x="50" y="50" width="180" height="120" fill="#F0F0F0" stroke="var(--apple-blue)" stroke-width="0.5" /> <text x="140" y="110" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#555">Living Room</text>
+                                    <rect x="230" y="50" width="120" height="120" fill="#E9E9EA" stroke="var(--apple-blue)" stroke-width="0.5" /> <text x="290" y="110" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#555">Bedroom</text>
+                                    <rect x="50" y="170" width="120" height="80" fill="#F0F0F0" stroke="var(--apple-blue)" stroke-width="0.5" /> <text x="110" y="210" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#555">Kitchen</text>
+                                    <text x="200" y="30" font-family="Montserrat, Arial, sans-serif" font-size="14" font-weight="500" text-anchor="middle" fill="var(--text-primary)" class="capitalize">Premium Suite - 50 sqm</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-semibold text-gray-900 mb-4 capitalize">Premium Suite (50 sqm)</h4>
+                                <p class="text-var(--text-secondary) mb-6">Our compact yet luxurious premium suite offers the perfect balance of comfort and elegance. Ideal for individuals or couples.</p>
+                                <div class="space-y-3 mb-6 text-gray-800">
+                                    <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Launch Price:</span> <span class="font-medium text-gray-900">₹32,50,000</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Down Payment:</span> <span class="font-medium text-gray-900">₹8,12,500</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Annual ROI:</span> <span class="font-medium text-[var(--apple-blue)]">9.2%</span> </div>
+                                </div>
+                                <button class="w-full btn-apple btn-apple-primary"> Enquire About This Unit </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="premium-85" class="unit-type-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                           <div>
+                                <svg class="w-full h-auto max-h-72 mb-6" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="300" fill="#F9FAFB" rx="10"/> <rect x="30" y="30" width="340" height="240" fill="none" stroke="var(--apple-blue)" stroke-width="3" rx="5"/>
+                                    <rect x="30" y="30" width="200" height="120" fill="#F0F0F0" stroke="var(--apple-blue)" stroke-width="0.5" /> <text x="130" y="90" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#555">Living Room</text>
+                                    <rect x="230" y="30" width="140" height="120" fill="#E9E9EA" stroke="var(--apple-blue)" stroke-width="0.5" /> <text x="300" y="90" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#555">Master Bed</text>
+                                    <rect x="230" y="150" width="140" height="120" fill="#E9E9EA" stroke="var(--apple-blue)" stroke-width="0.5" /> <text x="300" y="210" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#555">Bedroom 2</text>
+                                    <text x="200" y="15" font-family="Montserrat, Arial, sans-serif" font-size="14" font-weight="500" text-anchor="middle" fill="var(--text-primary)" class="capitalize">Premium Suite - 85 sqm</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-semibold text-gray-900 mb-4 capitalize">Premium Suite (85 sqm)</h4>
+                                <p class="text-var(--text-secondary) mb-6">Our spacious premium suite offers generous living space with two bedrooms, perfect for families or those seeking additional room.</p>
+                                <div class="space-y-3 mb-6 text-gray-800">
+                                    <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Launch Price:</span> <span class="font-medium text-gray-900">₹55,25,000</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Down Payment:</span> <span class="font-medium text-gray-900">₹13,81,250</span> </div>
+                                    <div class="flex items-center justify-between"> <span class="text-var(--text-secondary)">Annual ROI:</span> <span class="font-medium text-[var(--apple-blue)]">9.2%</span> </div>
+                                </div>
+                                <button class="w-full btn-apple btn-apple-primary"> Enquire About This Unit </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 capitalize">Exclusive Amenities</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">Project Ananta offers a range of world-class amenities designed to provide an unparalleled luxury experience.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="amenity-card p-6"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-utensils"></i> </div> <h3 class="text-xl font-semibold text-gray-800 mb-2 capitalize">Complimentary Dining</h3> <p class="text-var(--text-secondary)">Enjoy tempting food and unlimited beverages during your stay.</p> </div>
+                <div class="amenity-card p-6"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-gamepad"></i> </div> <h3 class="text-xl font-semibold text-gray-800 mb-2 capitalize">VR Games & RC Toys</h3> <p class="text-var(--text-secondary)">Access to RC toys championship and VR gaming experiences.</p> </div>
+                <div class="amenity-card p-6"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-water"></i> </div> <h3 class="text-xl font-semibold text-gray-800 mb-2 capitalize">Water Sports</h3> <p class="text-var(--text-secondary)">Enjoy a variety of exciting water sports activities.</p> </div>
+                <div class="amenity-card p-6"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-plane"></i> </div> <h3 class="text-xl font-semibold text-gray-800 mb-2 capitalize">Flying Club</h3> <p class="text-var(--text-secondary)">Experience the thrill of aviation with our exclusive flying club.</p> </div>
+                <div class="amenity-card p-6"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-spa"></i> </div> <h3 class="text-xl font-semibold text-gray-800 mb-2 capitalize">Yoga & Wellness</h3> <p class="text-var(--text-secondary)">Rejuvenate your mind and body with professional yoga sessions.</p> </div>
+                <div class="amenity-card p-6"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-music"></i> </div> <h3 class="text-xl font-semibold text-gray-800 mb-2 capitalize">Live Music Concerts</h3> <p class="text-var(--text-secondary)">Enjoy exclusive live music performances by renowned artists.</p> </div>
+            </div>
+             <div class="mt-16">
+                <h3 class="text-3xl font-semibold text-gray-900 mb-8 text-center capitalize">Experience Unmatched Luxury</h3>
+                <div class="relative">
+                    <div class="overflow-hidden rounded-xl">
+                        <div id="amenities-slider" class="flex transition-transform duration-500 ease-in-out">
+                            <div class="min-w-full px-1"> <div class="bg-[var(--light-gray-bg)] p-8 rounded-xl "> <div class="flex items-center mb-6"> <div class="text-[var(--apple-blue)] text-4xl mr-6"> <i class="fas fa-concierge-bell"></i> </div> <div> <h4 class="text-xl font-semibold text-gray-900 capitalize">5-Star Service</h4> <p class="text-var(--text-secondary)">Unparalleled hospitality with dedicated staff.</p> </div> </div> <p class="text-var(--text-secondary)">Our trained professionals are available 24/7 to cater to your every need, ensuring comfort and luxury.</p> </div> </div>
+                            <div class="min-w-full px-1"> <div class="bg-[var(--light-gray-bg)] p-8 rounded-xl "> <div class="flex items-center mb-6"> <div class="text-[var(--apple-blue)] text-4xl mr-6"> <i class="fas fa-swimming-pool"></i> </div> <div> <h4 class="text-xl font-semibold text-gray-900 capitalize">Infinity Pools</h4> <p class="text-var(--text-secondary)">Relax in stunning pools with panoramic views.</p> </div> </div> <p class="text-var(--text-secondary)">Each tower features rooftop infinity pools offering breathtaking views and premium poolside service.</p> </div> </div>
+                            <div class="min-w-full px-1"> <div class="bg-[var(--light-gray-bg)] p-8 rounded-xl "> <div class="flex items-center mb-6"> <div class="text-[var(--apple-blue)] text-4xl mr-6"> <i class="fas fa-dumbbell"></i> </div> <div> <h4 class="text-xl font-semibold text-gray-900 capitalize">Fitness Center</h4> <p class="text-var(--text-secondary)">State-of-the-art gym with personal trainers.</p> </div> </div> <p class="text-var(--text-secondary)">Fully-equipped fitness centers with the latest machines and professional trainers for personalized workout plans.</p> </div> </div>
+                        </div>
+                    </div>
+                    <button id="prev-slide" class="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-4 bg-white hover:bg-gray-100 text-gray-700 w-10 h-10 rounded-full shadow-md flex items-center justify-center focus:outline-none"> <i class="fas fa-chevron-left"></i> </button>
+                    <button id="next-slide" class="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-4 bg-white hover:bg-gray-100 text-gray-700 w-10 h-10 rounded-full shadow-md flex items-center justify-center focus:outline-none"> <i class="fas fa-chevron-right"></i> </button>
+                    <div class="flex justify-center mt-6"> <div class="slider-dot active mx-1 w-2.5 h-2.5 rounded-full" data-index="0"></div> <div class="slider-dot mx-1 w-2.5 h-2.5 rounded-full" data-index="1"></div> <div class="slider-dot mx-1 w-2.5 h-2.5 rounded-full" data-index="2"></div> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-[var(--light-gray-bg)]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 capitalize">What Our Investors Say</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">Hear from our satisfied investors who have already secured their place in Project Ananta.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-sm"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-quote-left"></i> </div> <p class="text-gray-700 mb-6 text-lg">"Investing in Ananta was a great decision. The guaranteed rental income and buyback option provide peace of mind."</p> <div class="flex items-center mt-auto"> <div class="w-12 h-12 bg-[var(--apple-blue)] rounded-full flex items-center justify-center text-white text-xl font-medium mr-4"> RK </div> <div> <h4 class="text-gray-900 font-semibold">Rajesh Kumar</h4> <p class="text-var(--text-secondary) text-sm">Investor since 2022</p> </div> </div> </div>
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-sm"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-quote-left"></i> </div> <p class="text-gray-700 mb-6 text-lg">"The complimentary stay with unlimited food and beverages is an incredible perk. My family loves visiting."</p> <div class="flex items-center mt-auto"> <div class="w-12 h-12 bg-[var(--apple-blue)] rounded-full flex items-center justify-center text-white text-xl font-medium mr-4"> SP </div> <div> <h4 class="text-gray-900 font-semibold">Sunita Patel</h4> <p class="text-var(--text-secondary) text-sm">Investor since 2022</p> </div> </div> </div>
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-sm"> <div class="text-[var(--apple-blue)] text-3xl mb-4"> <i class="fas fa-quote-left"></i> </div> <p class="text-gray-700 mb-6 text-lg">"As a first-time investor, the team guided me perfectly. Hassle-free investment with great returns."</p> <div class="flex items-center mt-auto"> <div class="w-12 h-12 bg-[var(--apple-blue)] rounded-full flex items-center justify-center text-white text-xl font-medium mr-4"> AM </div> <div> <h4 class="text-gray-900 font-semibold">Amit Mehta</h4> <p class="text-var(--text-secondary) text-sm">Investor since 2023</p> </div> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 capitalize">Frequently Asked Questions</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">Find answers to common questions about Project Ananta and the investment opportunity.</p>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <div class="faq-item"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg font-medium text-gray-800">What is the minimum investment required?</h3> <span class="faq-toggle text-xl"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-2"> <p>The minimum investment starts at ₹32,50,000 for a 50 sqm premium suite, with a down payment of ₹8,12,500. We also offer flexible payment plans.</p> </div> </div>
+                <div class="faq-item"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg font-medium text-gray-800">How does the buyback guarantee work?</h3> <span class="faq-toggle text-xl"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-2"> <p>Our buyback guarantee ensures Global One Consulting will repurchase your unit at a predetermined value after a specified period, providing a secure exit strategy.</p> </div> </div>
+                <div class="faq-item"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg font-medium text-gray-800">What does "lifetime free maintenance" include?</h3> <span class="faq-toggle text-xl"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-2"> <p>It covers common area maintenance, repairs, and upkeep of your apartment, including electrical, plumbing, structural maintenance, and regular cleaning services when unoccupied.</p> </div> </div>
+                <div class="faq-item"> <div class="faq-question flex justify-between items-center"> <h3 class="text-lg font-medium text-gray-800">How is the monthly rental income paid?</h3> <span class="faq-toggle text-xl"> <i class="fas fa-chevron-down"></i> </span> </div> <div class="faq-answer pt-2"> <p>Monthly rental income is directly deposited into your bank account on a fixed date each month, guaranteed regardless of occupancy for a stable passive income.</p> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-[var(--light-gray-bg)]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 capitalize">Project Gallery</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">Explore the luxurious spaces and amenities of Project Ananta through our gallery.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <div class="overflow-hidden rounded-xl shadow-sm"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9ECEF" /> <rect x="20" y="20" width="360" height="210" fill="#F8F9FA" rx="5"/> <rect x="40" y="40" width="320" height="170" fill="var(--apple-blue)" opacity="0.1" rx="3"/> <text x="200" y="130" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Luxury Suite Interior</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-sm"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9ECEF" /> <rect x="20" y="20" width="360" height="210" fill="#F8F9FA" rx="5"/> <circle cx="200" cy="125" r="80" fill="var(--apple-blue)" opacity="0.1" /> <text x="200" y="130" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Swimming Pool</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-sm"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9ECEF" /> <rect x="20" y="20" width="360" height="210" fill="#F8F9FA" rx="5"/> <polygon points="200,40 300,210 100,210" fill="var(--apple-blue)" opacity="0.1" /> <text x="200" y="130" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Lobby Area</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-sm"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9ECEF" /> <rect x="20" y="20" width="360" height="210" fill="#F8F9FA" rx="5"/> <rect x="60" y="60" width="280" height="130" fill="var(--apple-blue)" opacity="0.1" rx="3"/> <text x="200" y="130" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Fine Dining</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-sm"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9ECEF" /> <rect x="20" y="20" width="360" height="210" fill="#F8F9FA" rx="5"/> <ellipse cx="200" cy="125" rx="120" ry="60" fill="var(--apple-blue)" opacity="0.1" /> <text x="200" y="130" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Spa & Wellness</text> </svg> </div>
+                <div class="overflow-hidden rounded-xl shadow-sm"> <svg class="gallery-img w-full" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"> <rect width="400" height="250" fill="#E9ECEF" /> <rect x="20" y="20" width="360" height="210" fill="#F8F9FA" rx="5"/> <path d="M100,210 Q200,40 300,210" stroke="var(--apple-blue)" stroke-width="30" stroke-opacity="0.1" fill="none" /> <text x="200" y="130" font-family="Montserrat, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Aerial View</text> </svg> </div>
+            </div>
+            <div class="text-center mt-10"> <button id="view-more-gallery" class="btn-apple btn-apple-primary"> View More Images </button> </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 capitalize">Prime Location</h2>
+                <div class="w-20 h-1 bg-[var(--apple-blue)] mx-auto mb-6"></div>
+                <p class="text-var(--text-secondary) max-w-3xl mx-auto text-lg">Project Ananta is strategically located to offer convenience, connectivity, and a serene environment.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div> <div class="bg-[var(--light-gray-bg)] p-6 rounded-xl shadow-sm">
+                        <svg class="w-full h-auto max-h-[400px] mb-6" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#E9ECEF" rx="10"/>
+                            <line x1="50" y1="150" x2="350" y2="150" stroke="#CFD8DC" stroke-width="8" />
+                            <line x1="200" y1="50" x2="200" y2="250" stroke="#CFD8DC" stroke-width="8" />
+                            <circle cx="200" cy="150" r="18" fill="var(--apple-blue)" />
+                            <text x="200" y="155" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="500" text-anchor="middle" fill="#FFFFFF" class="uppercase">ANANTA</text>
+                            <circle cx="100" cy="100" r="8" fill="#B0BEC5" /> <text x="100" y="88" font-family="Montserrat, Arial, sans-serif" font-size="7" font-weight="400" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Airport</text>
+                            <circle cx="300" cy="100" r="8" fill="#B0BEC5" /> <text x="300" y="88" font-family="Montserrat, Arial, sans-serif" font-size="7" font-weight="400" text-anchor="middle" fill="var(--text-secondary)" class="capitalize">Mall</text>
+                        </svg>
+                    </div> </div>
+                <div> <div class="bg-[var(--light-gray-bg)] p-8 rounded-xl shadow-sm">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6 capitalize">Nearby Conveniences</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-center"> <span class="text-[var(--apple-blue)] mr-3 w-6 text-center text-lg"><i class="fas fa-plane-departure"></i></span> <span>International Airport - 20 mins drive</span> </li>
+                            <li class="flex items-center"> <span class="text-[var(--apple-blue)] mr-3 w-6 text-center text-lg"><i class="fas fa-shopping-mall"></i></span> <span>Luxury Shopping Mall - 10 mins drive</span> </li>
+                            <li class="flex items-center"> <span class="text-[var(--apple-blue)] mr-3 w-6 text-center text-lg"><i class="fas fa-hospital"></i></span> <span>Multi-specialty Hospital - 15 mins drive</span> </li>
+                            <li class="flex items-center"> <span class="text-[var(--apple-blue)] mr-3 w-6 text-center text-lg"><i class="fas fa-train"></i></span> <span>Metro Station - 5 mins walk</span> </li>
+                        </ul>
+                        <p class="text-var(--text-secondary) mt-6">Situated in a rapidly developing area with excellent infrastructure, ensuring high appreciation potential and ease of access.</p>
+                    </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section - This is now hidden as its content is in the modal -->
+    <section id="contact" class="py-16 bg-[var(--light-gray-bg)] hidden"> </section>
+
+    <!-- Contact Popup Modal -->
+    <div id="contact-popup-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[1100] hidden">
+        <div id="contact-popup-modal-content" class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-4xl w-11/12 md:w-full mx-4 relative max-h-[90vh] overflow-y-auto">
+            <button id="close-contact-popup-btn" class="absolute top-4 right-5 text-gray-500 hover:text-gray-700 text-3xl leading-none font-light">×</button>
+            <div class="text-center mb-6 md:mb-8">
+                <h2 class="text-3xl md:text-4xl font-semibold text-gray-900 mb-3 capitalize">Get in Touch</h2>
+                <div class="w-16 h-0.5 bg-[var(--apple-blue)] mx-auto mb-4"></div>
+                <p class="text-var(--text-secondary) text-sm md:text-base max-w-2xl mx-auto">Have questions or ready to invest? Contact us today, and our expert team will assist you.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-gray-50 p-4 md:p-6 rounded-lg contact-form">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 capitalize">Send Us a Message</h3>
+                    <form action="#" method="POST" id="popup-contact-form-actual" class="space-y-4">
+                        <div>
+                            <label for="popup-name" class="block text-var(--text-secondary) mb-1 text-sm">Full Name</label>
+                            <input type="text" id="popup-name" name="name" class="w-full" required>
+                        </div>
+                        <div>
+                            <label for="popup-email" class="block text-var(--text-secondary) mb-1 text-sm">Email Address</label>
+                            <input type="email" id="popup-email" name="email" class="w-full" required>
+                        </div>
+                        <div>
+                            <label for="popup-phone" class="block text-var(--text-secondary) mb-1 text-sm">Phone Number (Optional)</label>
+                            <input type="tel" id="popup-phone" name="phone" class="w-full">
+                        </div>
+                        <div>
+                            <label for="popup-message" class="block text-var(--text-secondary) mb-1 text-sm">Message</label>
+                            <textarea id="popup-message" name="message" rows="3" class="w-full" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full btn-apple btn-apple-primary">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-gray-50 p-4 md:p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 capitalize">Contact Information</h3>
+                    <div class="space-y-4 text-sm">
+                         <div class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3 mt-1 text-lg"><i class="fas fa-map-marker-alt fa-fw"></i></span> <div> <h4 class="font-medium text-gray-800">Address:</h4> <p class="text-var(--text-secondary)">123 Luxury Avenue, Prime City, India 400001</p> </div> </div>
+                        <div class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3 mt-1 text-lg"><i class="fas fa-phone-alt fa-fw"></i></span> <div> <h4 class="font-medium text-gray-800">Phone:</h4> <p class="text-var(--text-secondary)">+91 98765 43210</p> </div> </div>
+                        <div class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3 mt-1 text-lg"><i class="fas fa-envelope fa-fw"></i></span> <div> <h4 class="font-medium text-gray-800">Email:</h4> <p class="text-var(--text-secondary)">info@globaloneconsulting.com</p> </div> </div>
+                        <div class="flex items-start"> <span class="text-[var(--apple-blue)] mr-3 mt-1 text-lg"><i class="fas fa-clock fa-fw"></i></span> <div> <h4 class="font-medium text-gray-800">Business Hours:</h4> <p class="text-var(--text-secondary)">Mon - Fri: 9 AM - 6 PM</p> <p class="text-var(--text-secondary)">Sat: 10 AM - 4 PM</p> </div> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-[var(--light-gray-bg)] text-var(--text-secondary) py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div> <h3 class="text-xl font-semibold text-var(--text-primary) mb-4">GlobalOne Consulting</h3> <p class="text-sm">Your trusted partner in luxury real estate investments. Project Ananta is our commitment to excellence and unparalleled returns.</p> </div>
+                <div> <h3 class="text-xl font-semibold text-var(--text-primary) mb-4 capitalize">Quick Links</h3> <ul class="space-y-2"> <li><a href="#about" class="hover:text-[var(--apple-blue)] transition">About Us</a></li> <li><a href="#project" class="hover:text-[var(--apple-blue)] transition">Project Ananta</a></li> <li><a href="#amenities" class="hover:text-[var(--apple-blue)] transition">Amenities</a></li> <li><a href="#contact" class="hover:text-[var(--apple-blue)] transition">Contact</a></li> </ul> </div>
+                <div> <h3 class="text-xl font-semibold text-var(--text-primary) mb-4 capitalize">Follow Us</h3> <div class="flex space-x-4"> <a href="#" class="hover:text-[var(--apple-blue)] transition text-xl"><i class="fab fa-facebook-f"></i></a> <a href="#" class="hover:text-[var(--apple-blue)] transition text-xl"><i class="fab fa-twitter"></i></a> <a href="#" class="hover:text-[var(--apple-blue)] transition text-xl"><i class="fab fa-instagram"></i></a> <a href="#" class="hover:text-[var(--apple-blue)] transition text-xl"><i class="fab fa-linkedin-in"></i></a> </div> </div>
+            </div>
+            <div class="border-t border-[var(--border-color)] pt-8 text-center text-sm">
+                <p>© <span id="currentYear"></span> Global One Consulting. All Rights Reserved.</p>
+                <p>Designed with <i class="fas fa-heart text-red-500"></i> for discerning investors.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top"> <i class="fas fa-arrow-up"></i> </div>
+
+    <!-- Investment Calculator Modal -->
+    <div id="investment-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[1060] hidden">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-md w-11/12 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold text-gray-900 capitalize">Investment Calculator</h3>
+                <button id="close-investment-modal-btn" class="text-gray-400 hover:text-gray-600 text-2xl font-light">×</button>
+            </div>
+            <div class="space-y-4">
+                <p class="text-var(--text-secondary)">Estimate your potential returns with Project Ananta.</p>
+                <div>
+                    <label for="investment-amount" class="block text-sm font-medium text-var(--text-secondary) mb-1">Investment Amount (₹)</label>
+                    <input type="number" id="investment-amount" name="investment-amount" class="w-full" placeholder="e.g., 3250000">
+                </div>
+                <div>
+                    <label for="expected-roi" class="block text-sm font-medium text-var(--text-secondary) mb-1">Expected Annual ROI (%)</label>
+                    <input type="number" id="expected-roi" name="expected-roi" value="9.2" class="w-full">
+                </div>
+                <button id="calculate-investment-button" class="w-full btn-apple btn-apple-primary">Calculate</button>
+                <div id="calculation-result" class="mt-4 text-lg text-center font-medium">
+                    <!-- Results will be injected here. -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Login/Sign Up) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[1070] hidden">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-md w-11/12 mx-4 relative">
+            <button id="close-auth-modal-btn" class="absolute top-4 right-5 text-gray-400 hover:text-gray-600 text-3xl leading-none font-light">×</button>
+
+            <div id="login-form-container" class="auth-form">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6 text-center capitalize">Login</h3>
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label for="login-email" class="block text-var(--text-secondary) mb-1 text-sm">Email or Username</label>
+                        <input type="text" id="login-email" name="login-email" class="w-full" required>
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-var(--text-secondary) mb-1 text-sm">Password</label>
+                        <input type="password" id="login-password" name="login-password" class="w-full" required>
+                    </div>
+                    <div class="text-right">
+                        <a href="#" class="text-sm btn-apple-link">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full btn-apple btn-apple-primary">Login</button>
+                    </div>
+                    <p class="text-center text-sm text-var(--text-secondary) pt-2">
+                        Don't have an account? <a href="#" id="show-signup-form-link" class="btn-apple-link font-semibold">Sign Up</a>
+                    </p>
+                </form>
+            </div>
+
+            <div id="signup-form-container" class="auth-form hidden">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6 text-center capitalize">Sign Up</h3>
+                <form id="signup-form" class="space-y-4">
+                    <div>
+                        <label for="signup-name" class="block text-var(--text-secondary) mb-1 text-sm">Full Name</label>
+                        <input type="text" id="signup-name" name="signup-name" class="w-full" required>
+                    </div>
+                    <div>
+                        <label for="signup-email" class="block text-var(--text-secondary) mb-1 text-sm">Email Address</label>
+                        <input type="email" id="signup-email" name="signup-email" class="w-full" required>
+                    </div>
+                    <div>
+                        <label for="signup-password" class="block text-var(--text-secondary) mb-1 text-sm">Password</label>
+                        <input type="password" id="signup-password" name="signup-password" class="w-full" required>
+                    </div>
+                    <div>
+                        <label for="signup-confirm-password" class="block text-var(--text-secondary) mb-1 text-sm">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" name="signup-confirm-password" class="w-full" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full btn-apple btn-apple-primary">Sign Up</button>
+                    </div>
+                     <p class="text-center text-sm text-var(--text-secondary) pt-2">
+                        Already have an account? <a href="#" id="show-login-form-link" class="btn-apple-link font-semibold">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+            let scrollLockCounter = 0;
+            function requestBodyScrollLock() {
+                scrollLockCounter++;
+                if (scrollLockCounter === 1) {
+                    document.body.classList.add('body-no-scroll');
+                }
+            }
+            function releaseBodyScrollLock() {
+                scrollLockCounter--;
+                if (scrollLockCounter <= 0) {
+                    document.body.classList.remove('body-no-scroll');
+                    scrollLockCounter = 0; 
+                }
+            }
+
+            function openSidebar() {
+                mobileMenu.classList.add('open');
+                sidebarOverlay.classList.add('active');
+                requestBodyScrollLock();
+            }
+
+            function closeSidebar() {
+                mobileMenu.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+                releaseBodyScrollLock();
+            }
+
+            mobileMenuButton?.addEventListener('click', openSidebar);
+            closeMobileMenuButton?.addEventListener('click', closeSidebar);
+            sidebarOverlay?.addEventListener('click', closeSidebar);
+
+            const scrollToTopButton = document.querySelector('.scroll-to-top');
+            if (scrollToTopButton) {
+                window.addEventListener('scroll', () => {
+                    scrollToTopButton.classList.toggle('visible', window.pageYOffset > 300);
+                });
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            const faqItems = document.querySelectorAll('.faq-item');
+            // Make first FAQ item active by default
+            if (faqItems.length > 0) {
+                // faqItems[0].classList.add('active'); // Uncomment if you want first open by default
+            }
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question?.addEventListener('click', () => {
+                    // Optional: Close other FAQ items when one is opened
+                    // faqItems.forEach(otherItem => {
+                    //     if (otherItem !== item) otherItem.classList.remove('active');
+                    // });
+                    item.classList.toggle('active');
+                });
+            });
+
+            const unitTypeTabs = document.querySelectorAll('.unit-type-tab');
+            const unitTypeContents = document.querySelectorAll('.unit-type-content');
+            unitTypeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    unitTypeTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.dataset.target;
+                    unitTypeContents.forEach(content => {
+                        content.classList.toggle('active', content.id === targetId);
+                    });
+                });
+            });
+
+            function animateCounter(element, target, duration = 1500) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        element.textContent = target.toLocaleString('en-IN');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.ceil(start).toLocaleString('en-IN');
+                    }
+                }, 16);
+                 if (target === 0) element.textContent = '0';
+            }
+            const counters = document.querySelectorAll('.counter-value');
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            counters.forEach(counter => counterObserver.observe(counter));
+
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            const progressBarObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.dataset.width;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            progressBars.forEach(bar => progressBarObserver.observe(bar));
+
+            const slider = document.getElementById('amenities-slider');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+            const sliderDots = document.querySelectorAll('.slider-dot');
+            if (slider && prevButton && nextButton && sliderDots.length > 0) {
+                let currentIndex = 0;
+                const totalSlides = slider.children.length;
+                function updateSlider() {
+                    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    sliderDots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+                nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
+                prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
+                sliderDots.forEach(dot => { dot.addEventListener('click', () => { currentIndex = parseInt(dot.dataset.index); updateSlider(); }); });
+                updateSlider(); // Initial setup
+            }
+
+            const openInvestmentModalButton = document.getElementById('open-investment-modal');
+            const closeInvestmentModalButton = document.getElementById('close-investment-modal-btn');
+            const investmentModal = document.getElementById('investment-modal');
+            const calculateInvestmentButton = document.getElementById('calculate-investment-button');
+            const investmentAmountInput = document.getElementById('investment-amount');
+            const expectedRoiInput = document.getElementById('expected-roi');
+            const calculationResultDiv = document.getElementById('calculation-result');
+
+            function openModal(modalElement) {
+                if (modalElement) {
+                    modalElement.classList.remove('hidden');
+                    requestBodyScrollLock();
+                }
+            }
+            function closeModal(modalElement) {
+                 if (modalElement) {
+                    modalElement.classList.add('hidden');
+                    releaseBodyScrollLock();
+                }
+            }
+            
+            openInvestmentModalButton?.addEventListener('click', (e) => { e.preventDefault(); openModal(investmentModal); });
+            closeInvestmentModalButton?.addEventListener('click', () => closeModal(investmentModal));
+            investmentModal?.addEventListener('click', (e) => { if (e.target === investmentModal) closeModal(investmentModal); });
+
+            calculateInvestmentButton?.addEventListener('click', () => {
+                const amount = parseFloat(investmentAmountInput.value);
+                const roi = parseFloat(expectedRoiInput.value);
+                calculationResultDiv.innerHTML = '';
+                if (isNaN(amount) || amount <= 0) { calculationResultDiv.innerHTML = '<p class="text-red-500 text-sm">Please enter a valid investment amount.</p>'; return; }
+                if (isNaN(roi) || roi <= 0) { calculationResultDiv.innerHTML = '<p class="text-red-500 text-sm">Please enter a valid ROI percentage.</p>'; return; }
+                const annualReturn = (amount * roi) / 100;
+                const monthlyReturn = annualReturn / 12;
+                calculationResultDiv.innerHTML = `
+                    <p class="text-green-600">Annual Return: ₹${annualReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    <p class="text-green-600">Monthly Return: ₹${monthlyReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                `;
+            });
+
+            const authModal = document.getElementById('auth-modal');
+            const closeAuthModalButton = document.getElementById('close-auth-modal-btn');
+            const mobileNavLoginBtn = document.getElementById('mobile-nav-login-btn');
+            const mobileNavSignupBtn = document.getElementById('mobile-nav-signup-btn');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const signupFormContainer = document.getElementById('signup-form-container');
+            const showSignupFormLink = document.getElementById('show-signup-form-link');
+            const showLoginFormLink = document.getElementById('show-login-form-link');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            function openAuthModal(formType = 'login') {
+                if (mobileMenu.classList.contains('open')) closeSidebar();
+                openModal(authModal);
+                if (formType === 'signup') {
+                    loginFormContainer.classList.add('hidden');
+                    signupFormContainer.classList.remove('hidden');
+                } else {
+                    loginFormContainer.classList.remove('hidden');
+                    signupFormContainer.classList.add('hidden');
+                }
+            }
+
+            mobileNavLoginBtn?.addEventListener('click', (e) => { e.preventDefault(); openAuthModal('login'); });
+            mobileNavSignupBtn?.addEventListener('click', (e) => { e.preventDefault(); openAuthModal('signup'); });
+            closeAuthModalButton?.addEventListener('click', () => closeModal(authModal));
+            authModal?.addEventListener('click', (e) => { if (e.target === authModal) closeModal(authModal); });
+
+            showSignupFormLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginFormContainer.classList.add('hidden');
+                signupFormContainer.classList.remove('hidden');
+            });
+            showLoginFormLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupFormContainer.classList.add('hidden');
+                loginFormContainer.classList.remove('hidden');
+            });
+
+            loginForm?.addEventListener('submit', (e) => { e.preventDefault(); alert('Login form submitted (simulated).'); });
+            signupForm?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const password = signupForm.querySelector('#signup-password').value;
+                const confirmPassword = signupForm.querySelector('#signup-confirm-password').value;
+                if (password !== confirmPassword) { alert("Passwords do not match!"); return; }
+                alert('Sign Up form submitted (simulated).');
+            });
+
+            document.getElementById('view-more-gallery')?.addEventListener('click', () => {
+                alert('More gallery images would be displayed here.');
+            });
+
+            const contactPopupModal = document.getElementById('contact-popup-modal');
+            const closeContactPopupBtn = document.getElementById('close-contact-popup-btn');
+            const popupContactFormActual = document.getElementById('popup-contact-form-actual');
+
+            function openContactPopup() { openModal(contactPopupModal); }
+            function closeContactPopup() { closeModal(contactPopupModal); }
+
+            if (contactPopupModal) {
+                 setTimeout(() => { // Auto open contact popup after 5 seconds
+                    if (!authModal?.classList.contains('hidden') || !investmentModal?.classList.contains('hidden')) {
+                        // Don't open if another modal is already open
+                        return;
+                    }
+                    openContactPopup();
+                }, 5000); // Delay opening for 5 seconds
+
+                closeContactPopupBtn?.addEventListener('click', closeContactPopup);
+                contactPopupModal.addEventListener('click', (e) => { if (e.target === contactPopupModal) closeContactPopup(); });
+            }
+            
+            popupContactFormActual?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Popup contact form submitted (simulated).');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    const isMobileMenuLink = this.classList.contains('mobile-menu-link') || this.closest('#mobile-menu');
+
+                    if (href === '#contact') {
+                        e.preventDefault();
+                        if (isMobileMenuLink && mobileMenu.classList.contains('open')) {
+                            closeSidebar();
+                            setTimeout(openContactPopup, 300); 
+                        } else {
+                            openContactPopup();
+                        }
+                        return; 
+                    }
+
+                    if (href.startsWith('#') && href.length > 1) {
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            e.preventDefault();
+                            if (isMobileMenuLink && mobileMenu.classList.contains('open')) {
+                                closeSidebar();
+                                setTimeout(() => {
+                                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 300); 
+                            } else {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }
+                    }
+                });
+            });
+
+            const currentYearSpan = document.getElementById('currentYear');
+            if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
